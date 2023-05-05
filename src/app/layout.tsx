@@ -7,7 +7,7 @@ import logo from "../../public/assets/images/logo.svg"
 import homeIco from "../../public/assets/icons/home.svg"
 import contactIco from "../../public/assets/icons/mail.svg"
 
-const josefin = Josefin_Sans({ subsets: ['latin'] })
+const josefin = Josefin_Sans({ subsets: ['latin'], variable: "--font-josefin"})
 
 export const metadata = {
   title: 'Adopet',

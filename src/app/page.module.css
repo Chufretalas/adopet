@@ -4,6 +4,40 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   width: 80vw;
-  margin: 0 auto;
+  max-height: 80vh;
+  height: max-content;
+  margin: auto auto;
+  text-align: center;
+}
+
+.logo_greetings {
+  font-size: 1.1rem;
+}
+
+.buttons_wrapper {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 60%;
+  align-items: center;
+}
+
+.illustration {
+  height: 51vh;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 992px) {
+
+  .buttons_wrapper {
+    width: 100%;
+  }
+
+  .illustration {
+    height: auto;
+    width: 80vw;
+  }
 }

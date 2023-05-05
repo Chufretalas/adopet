@@ -1,0 +1,19 @@
+.button {
+    border: none;
+    border-radius: 99999px;
+    width: 80%;
+    background-color: var(--orange-color);
+    font-family: var(--font-josefin);
+    padding: 0.5rem;
+    font-size: large;
+    font-weight: 500;
+    transition: all 100ms;
+}
+
+.button:hover {
+    filter: brightness(90%);
+}
+
+.button:active {
+    transform: scale(1.05);
+}
