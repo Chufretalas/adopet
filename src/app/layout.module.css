@@ -1,16 +1,37 @@
 .header {
     position: sticky;
     top: 0;
-    width: 20vw;
     background-color: var(--accent-color);
-    border-bottom-right-radius: 99999px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    max-height: 6vh;
+    margin-bottom: 1rem;
 }
 
 .header_logo {
-    position: relative;
-    left: 10px;
-    top: 5px;
-    width: 80%;
+    height: 80%;
+    max-height: 5vh;
+}
+
+@media only screen and (min-width: 992px) {
+    .header {
+        display: block;
+        width: 20vw;
+        border-bottom-right-radius: 99999px;
+        max-height: none;
+        margin-bottom: none;
+    }
+
+    .header_logo {
+        position: relative;
+        left: 10px;
+        top: 5px;
+        width: 80%;
+        max-height: none;
+    }
 }
 
 .nav_buttons {
@@ -32,6 +53,12 @@
 
 .nav_buttons img:active {
     transform: scale(1.05);
+}
+
+@media only screen and (max-width: 992px) {
+    .nav_buttons{
+        width: 50%;
+    }
 }
 
 .footer {
@@ -56,4 +83,15 @@
     width: 80%;
     border-top-left-radius: 99999px;
     border-top-right-radius: 99999px;
+}
+
+@media only screen and (max-width: 992px) {
+    .footer {
+        height: 5vw;
+        padding-top: 10px;
+    }
+
+    .footer_content {
+        font-size: small;
+    }
 }
