@@ -3,10 +3,11 @@ import Image from "next/image"
 import logo from "../../public/assets/images/logo.svg"
 import illustration from "../../public/assets/images/illustratrion.svg"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import Link from "next/link"
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <div className={styles.logo_greetings}>
         <Image src={logo} alt="adopet logo" />
         <h1>Welcome!</h1>
@@ -14,10 +15,14 @@ export default function Home() {
         <p>Come with us!</p>
       </div>
       <div className={styles.buttons_wrapper}>
-        <OrangeButton>Login</OrangeButton>
-        <OrangeButton>Create an account</OrangeButton>
+        <Link href={"/login"}>
+          <OrangeButton>Login</OrangeButton>
+        </Link>
+        <Link href={"/signup"}>
+          <OrangeButton>Create an account</OrangeButton>
+        </Link>
       </div>
-      <Image src={illustration} alt="cat and dog illustration" className={styles.illustration}/>
-    </main>
+      <Image src={illustration} alt="cat and dog illustration" className={styles.illustration} />
+    </div>
   )
 }

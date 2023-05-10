@@ -1,0 +1,68 @@
+.main {
+    background-color: white;
+    width: 50vw;
+    height: 70vh;
+    margin: auto;
+    border-radius: 30px;
+    border: 8px solid black;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    filter: brightness(0);
+    margin-bottom: 0.3rem;
+}
+
+.hr {
+    height: 1px;
+    width: 40%;
+    margin: 1rem 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 50%;
+}
+
+.form button {
+    margin: auto;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+.fieldset label {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.fieldset input {
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-family: var(--font-josefin);
+}
+
+.fieldset input::placeholder {
+    font-family: var(--font-josefin);
+}
+
+.visibility_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.error_msg {}

@@ -1,7 +1,12 @@
 import styles from "./OrangeButton.module.css"
 
-export default function OrangeButton({ children }: { children: React.ReactNode }) {
+interface Props {
+    children?: React.ReactNode,
+    type?: "button" | "submit" | "reset"
+}
+
+export default function OrangeButton({ children, type }: Props) {
     return (
-        <button className={styles.button}>{children}</button>
+        <button className={styles.button} type={type}>{children}</button>
     )
 }

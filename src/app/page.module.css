@@ -25,6 +25,10 @@
   align-items: center;
 }
 
+.buttons_wrapper * {
+  width: 80%;
+}
+
 .illustration {
   height: 51vh;
   overflow: hidden;

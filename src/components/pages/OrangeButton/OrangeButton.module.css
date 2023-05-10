@@ -7,11 +7,13 @@
     padding: 0.5rem;
     font-size: large;
     font-weight: 500;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.511));
     transition: all 100ms;
 }
 
 .button:hover {
     filter: brightness(90%);
+    cursor: pointer;
 }
 
 .button:active {
