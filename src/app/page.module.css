@@ -1,6 +1,6 @@
 .main {
-  background-color: var(--blue-bg-color);
-  color: white;
+  border-radius: 3rem;
+  color: var(--blue-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +14,7 @@
 
 .logo_greetings {
   font-size: 1.1rem;
+  max-width: 90vw;
 }
 
 .buttons_wrapper {

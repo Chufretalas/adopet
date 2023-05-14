@@ -1,37 +1,30 @@
 "use client"
 
-import Image from "next/image"
+import { useState } from "react"
 import styles from "./styles.module.css"
 import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
-import { useState } from "react"
-import { createAccount } from "@/actions/account"
+import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 
-export default function SignupPage() {
-
+export default function LoginPage() {
+    
     const [errorMsg, setErrorMsg] = useState("idsadsa")
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        console.log(fd)
-        createAccount(fd)
+        console.log("form de login")
     }
 
     return (
         <div className={styles.main}>
             <div className={styles.header_wrapper}>
                 <Image src={logo} alt="adopet logo" className={styles.logo} />
-                <p className={styles.header_p}>Don't have an account?</p>
-                <p className={styles.header_p}>So, before finding a new friend, we need some info about you.</p>
+                <p className={styles.header_p}>Already have an account? So just log right in.</p>
             </div>
             <hr className={styles.hr}/>
             <form action={handleForm} className={styles.form}>
-                <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Name</label>
-                    <input type="text" placeholder="Your full name here" required />
-                </fieldset>
                 <fieldset className={styles.fieldset}>
                     <label htmlFor="">Email</label>
                     <input type="email" placeholder="Your email here" required />
@@ -40,12 +33,6 @@ export default function SignupPage() {
                     <label htmlFor="">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Please write a great password, please"
-                        minLength={8} required />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Confirm your password</label>
-                    <input type={hiddenPassword ? "password" : "text"}
-                        placeholder="Repeat your password"
                         minLength={8} required />
                 </fieldset>
                 <div className={styles.visibility_wrapper}>

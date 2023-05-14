@@ -8,7 +8,15 @@
     align-items: center;
     justify-content: center;
     max-height: 6vh;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.blue_bg {
+    background-color: var(--blue-bg-color);
+}
+
+.white_bg {
+    background-color: var(--white-bg-color);
 }
 
 .header_logo {
@@ -62,7 +70,7 @@
 }
 
 .main {
-    min-height: 90vh;
+    min-height: 95vh;
 }
 
 .footer {

@@ -20,9 +20,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
-      <body className={josefin.className}>
+      <body className={`${josefin.className} ${styles.white_bg}`}>
         <header className={styles.header}>
           <Link href={"/"}>
             <Image src={logo} alt="adopet logo" color="black" className={styles.header_logo} />

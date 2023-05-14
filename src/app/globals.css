@@ -1,9 +1,11 @@
 :root {
-  --blue-bg-color: #2359d8;
+  --white-bg-color: #FFFFFF;
+  --grey-bg-color: #F6F6F6;
+  --blue-color: #2359d8;
   --accent-color: #36D6AD;
   --orange-color: #FC7071;
 }
 
 body {  
-  background-color: var(--blue-bg-color);
+  background-color: var(--white-bg-color);
 }
