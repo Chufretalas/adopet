@@ -7,6 +7,7 @@ import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import { login } from "@/actions/account"
 
 export default function LoginPage() {
     
@@ -14,7 +15,11 @@ export default function LoginPage() {
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        console.log("form de login")
+        // TODO: hash password before sending to server
+        login({
+            email: fd.get("email") as string,
+            password: fd.get("password") as string
+        })
     }
 
     return (
@@ -26,14 +31,16 @@ export default function LoginPage() {
             <hr className={styles.hr}/>
             <form action={handleForm} className={styles.form}>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Email</label>
-                    <input type="email" placeholder="Your email here" required />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="Your email here" 
+                    id="email" name="email" required />
                 </fieldset>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
-                        placeholder="Please write a great password, please"
-                        minLength={8} required />
+                        placeholder="Your beautiful and secure password"
+                        minLength={8} 
+                        id="password" name="password" required />
                 </fieldset>
                 <div className={styles.visibility_wrapper}>
                     <Image src={hiddenPassword ? hiddenIco : visibleIco}

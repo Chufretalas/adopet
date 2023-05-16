@@ -11,12 +11,24 @@ import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 
 export default function SignupPage() {
 
-    const [errorMsg, setErrorMsg] = useState("idsadsa")
+    const [errorMsg, setErrorMsg] = useState("")
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        console.log(fd)
-        createAccount(fd)
+        // TODO: hash password before sending to server
+        const pass = fd.get("password") as string
+        const confirmPass = fd.get("confirm_password") as string
+        if (confirmPass !== pass) {
+            setErrorMsg("Both password fields must be equal")
+        } else {
+            setErrorMsg("")
+            createAccount({
+                name: fd.get("name") as string,
+                email: fd.get("email") as string,
+                password: pass,
+                confirmPassword: confirmPass,
+            })
+        }
     }
 
     return (
@@ -26,27 +38,32 @@ export default function SignupPage() {
                 <p className={styles.header_p}>Don't have an account?</p>
                 <p className={styles.header_p}>So, before finding a new friend, we need some info about you.</p>
             </div>
-            <hr className={styles.hr}/>
+            <hr className={styles.hr} />
             <form action={handleForm} className={styles.form}>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Name</label>
-                    <input type="text" placeholder="Your full name here" required />
+                    <label htmlFor="name">Name</label>
+                    <input type="text" placeholder="Your full name here" name="name" id="name" required />
                 </fieldset>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Email</label>
-                    <input type="email" placeholder="Your email here" required />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="Your email here" name="email" id="email" required />
                 </fieldset>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Please write a great password, please"
-                        minLength={8} required />
+                        minLength={8}
+                        name="password" id="password"
+                        required
+                    />
                 </fieldset>
                 <fieldset className={styles.fieldset}>
-                    <label htmlFor="">Confirm your password</label>
+                    <label htmlFor="confirm_pass">Confirm your password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Repeat your password"
-                        minLength={8} required />
+                        minLength={8}
+                        name="confirm_password" id="confirm_password"
+                        required />
                 </fieldset>
                 <div className={styles.visibility_wrapper}>
                     <Image src={hiddenPassword ? hiddenIco : visibleIco}
