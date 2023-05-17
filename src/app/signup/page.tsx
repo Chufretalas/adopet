@@ -9,6 +9,7 @@ import { useState } from "react"
 import { createAccount } from "@/actions/account"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 import { TUserRole } from "../types/random_types"
+import { redirect } from 'next/navigation';
 
 export default function SignupPage() {
 
@@ -23,13 +24,17 @@ export default function SignupPage() {
             setErrorMsg("Both password fields must be equal")
         } else {
             setErrorMsg("")
-            createAccount({
+            const sucess = await createAccount({
                 name: fd.get("name") as string,
                 email: fd.get("email") as string,
                 user_role: fd.get("user_role") as TUserRole,
                 password: pass,
                 confirmPassword: confirmPass,
             })
+            console.log(sucess)
+            if(sucess) {
+                redirect("/dashboard")
+            }
         }
     }
 
