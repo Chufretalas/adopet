@@ -47,7 +47,7 @@ model profiles {
 model users {
   id                                   Int        @id @default(autoincrement())
   name                                 String     @db.VarChar(120)
-  email                                String     @db.VarChar(90)
+  email                                String     @unique(map: "email_unique") @db.VarChar(90)
   password                             String     @db.VarChar(255)
   role                                 user_role
   phone_number                         String?    @db.VarChar(50)
