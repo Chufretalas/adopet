@@ -8,6 +8,7 @@ import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import { useState } from "react"
 import { createAccount } from "@/actions/account"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import { TUserRole } from "../types/random_types"
 
 export default function SignupPage() {
 
@@ -25,6 +26,7 @@ export default function SignupPage() {
             createAccount({
                 name: fd.get("name") as string,
                 email: fd.get("email") as string,
+                user_role: fd.get("user_role") as TUserRole,
                 password: pass,
                 confirmPassword: confirmPass,
             })
@@ -64,6 +66,19 @@ export default function SignupPage() {
                         minLength={8}
                         name="confirm_password" id="confirm_password"
                         required />
+                </fieldset>
+                <fieldset className={styles.fieldset}>
+                    <span className={styles.radios_title}>Do you...</span>
+                    <div className={styles.radios_wrapper}>
+                        <div className={styles.radio_field}>
+                            <input type="radio" name="user_role" id="adopter" value="adopter" defaultChecked={true} required />
+                            <label htmlFor="adopter">want to adopt</label>
+                        </div>
+                        <div className={styles.radio_field}>
+                            <input type="radio" name="user_role" id="owner" value="owner" required />
+                            <label htmlFor="owner">has pets to put for adoption</label>
+                        </div>
+                    </div>
                 </fieldset>
                 <div className={styles.visibility_wrapper}>
                     <Image src={hiddenPassword ? hiddenIco : visibleIco}

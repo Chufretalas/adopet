@@ -1,7 +1,7 @@
 .main {
     background-color: var(--grey-bg-color);
     width: 50vw;
-    height: 70vh;
+    min-height: 70vh;
     margin: auto;
     border-radius: 30px;
     border: 3px solid grey;
@@ -61,6 +61,18 @@
 
 .fieldset input::placeholder {
     font-family: var(--font-josefin);
+}
+
+.radios_title {
+    font-size: 1.1rem;
+}
+
+.radios_wrapper {
+    font-size: 1.1rem;
+}
+
+.radio_field {
+    margin: 10px 0;
 }
 
 .visibility_wrapper {
