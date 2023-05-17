@@ -2,17 +2,17 @@
 
 import { prisma } from "@/db"
 import { ILoginInfo, ISignupInfo } from "@/interfaces/forms"
-import { Dispatch, SetStateAction } from "react"
+import { comparePass, hashPass } from "@/util/pass_hash"
 
 export async function createAccount(info: ISignupInfo): Promise<boolean> {
-    console.log("criando conta", info)
+    const hashed = await hashPass(info.password)
     try {
         const res = await prisma.users.create({
             data: {
                 name: info.name,
                 email: info.email,
                 role: info.user_role,
-                password: info.password,
+                password: hashed,
             }
         })
         console.log(res)
@@ -26,5 +26,18 @@ export async function createAccount(info: ISignupInfo): Promise<boolean> {
 }
 
 export async function login(info: ILoginInfo) {
-    console.log("logando", info)
+    const user = await prisma.users.findFirst({
+        where: {
+            email: info.email
+        }
+    })
+
+    if (user) {
+        const validPass = await comparePass(info.password, user.password)
+        if (validPass) {
+            return true
+        }
+    }
+
+    return false
 }

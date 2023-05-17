@@ -8,18 +8,23 @@ import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 import { login } from "@/actions/account"
+import { redirect } from "next/navigation"
 
 export default function LoginPage() {
-    
-    const [errorMsg, setErrorMsg] = useState("idsadsa")
+
+    const [errorMsg, setErrorMsg] = useState("")
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        // TODO: hash password before sending to server
-        login({
+        const res = await login({
             email: fd.get("email") as string,
             password: fd.get("password") as string
         })
+        if (res) {
+            setErrorMsg("")
+            redirect("/home")
+        }
+        setErrorMsg("Invalid credentials")
     }
 
     return (
@@ -28,18 +33,18 @@ export default function LoginPage() {
                 <Image src={logo} alt="adopet logo" className={styles.logo} />
                 <p className={styles.header_p}>Already have an account? So just log right in.</p>
             </div>
-            <hr className={styles.hr}/>
+            <hr className={styles.hr} />
             <form action={handleForm} className={styles.form}>
                 <fieldset className={styles.fieldset}>
                     <label htmlFor="email">Email</label>
-                    <input type="email" placeholder="Your email here" 
-                    id="email" name="email" required />
+                    <input type="email" placeholder="Your email here"
+                        id="email" name="email" required />
                 </fieldset>
                 <fieldset className={styles.fieldset}>
                     <label htmlFor="password">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Your beautiful and secure password"
-                        minLength={8} 
+                        minLength={8}
                         id="password" name="password" required />
                 </fieldset>
                 <div className={styles.visibility_wrapper}>
@@ -49,7 +54,7 @@ export default function LoginPage() {
                         onClick={() => setHiddenPassword(!hiddenPassword)} />
                     <p>Show password</p>
                 </div>
-                <OrangeButton type="submit">Register</OrangeButton>
+                <OrangeButton type="submit">Login</OrangeButton>
                 <p className={styles.error_msg}>{errorMsg}</p>
             </form>
         </div>

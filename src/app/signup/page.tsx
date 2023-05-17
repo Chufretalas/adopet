@@ -10,6 +10,7 @@ import { createAccount } from "@/actions/account"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 import { TUserRole } from "../types/random_types"
 import { redirect } from 'next/navigation';
+import { hashPass } from "@/util/pass_hash"
 
 export default function SignupPage() {
 
@@ -17,24 +18,23 @@ export default function SignupPage() {
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        // TODO: hash password before sending to server
         const pass = fd.get("password") as string
         const confirmPass = fd.get("confirm_password") as string
         if (confirmPass !== pass) {
             setErrorMsg("Both password fields must be equal")
-        } else {
-            setErrorMsg("")
-            const sucess = await createAccount({
-                name: fd.get("name") as string,
-                email: fd.get("email") as string,
-                user_role: fd.get("user_role") as TUserRole,
-                password: pass,
-                confirmPassword: confirmPass,
-            })
-            console.log(sucess)
-            if(sucess) {
-                redirect("/dashboard")
-            }
+            return
+        }
+
+        setErrorMsg("")
+        const sucess = await createAccount({
+            name: fd.get("name") as string,
+            email: fd.get("email") as string,
+            user_role: fd.get("user_role") as TUserRole,
+            password: pass
+        })
+        console.log(sucess)
+        if (sucess) {
+            redirect("/home")
         }
     }
 
@@ -81,7 +81,7 @@ export default function SignupPage() {
                         </div>
                         <div className={styles.radio_field}>
                             <input type="radio" name="user_role" id="owner" value="owner" required />
-                            <label htmlFor="owner">has pets to put for adoption</label>
+                            <label htmlFor="owner">have pets to put for adoption</label>
                         </div>
                     </div>
                 </fieldset>

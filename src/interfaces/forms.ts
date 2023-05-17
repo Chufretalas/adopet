@@ -5,7 +5,6 @@ export interface ISignupInfo {
     email: string
     user_role: TUserRole
     password: string
-    confirmPassword: string
 }
 
 export interface ILoginInfo {
