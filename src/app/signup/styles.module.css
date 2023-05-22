@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: space-around;
     filter: drop-shadow(0 0 5px rgba(128, 128, 128, 0.512));
+    margin-bottom: 0.5rem;
 }
 
 .header_wrapper {
