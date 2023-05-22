@@ -24,23 +24,3 @@ export async function createAccount(info: ISignupInfo): Promise<boolean> {
     }
     return false
 }
-
-export async function login(info: ILoginInfo): Promise<boolean> {
-    try {
-        const user = await prisma.users.findFirst({
-            where: {
-                email: info.email
-            }
-        })
-
-        if (user) {
-            const validPass = await comparePass(info.password, user.password)
-            if (validPass) {
-                return true
-            }
-        }
-    } catch (error) {
-        console.log(error)
-    }
-    return false
-}

@@ -7,6 +7,8 @@ import logo from "../../public/assets/images/logo.svg"
 import homeIco from "../../public/assets/icons/home.svg"
 import contactIco from "../../public/assets/icons/mail.svg"
 import Link from "next/link"
+import { SessionProvider } from "next-auth/react"
+import Providers from "./providers"
 
 const josefin = Josefin_Sans({ subsets: ['latin'], variable: "--font-josefin" })
 
@@ -22,6 +24,7 @@ export default function RootLayout({
 }) {
 
   return (
+
     <html lang="en">
       <body className={`${josefin.className} ${styles.white_bg}`}>
         <header className={styles.header}>
@@ -35,9 +38,11 @@ export default function RootLayout({
             <Image src={contactIco} alt="Contact icon" />
           </div>
         </header>
-        <main className={styles.main}>
-          {children}
-        </main>
+        <Providers >
+          <main className={styles.main}>
+            {children}
+          </main>
+        </Providers>
         <footer className={styles.footer}>
           <div className={styles.footer_content}>
             2023 -Developed by Chufretalas

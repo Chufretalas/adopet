@@ -22,6 +22,7 @@
 .header_logo {
     height: 80%;
     max-height: 5vh;
+    width: auto;
 }
 
 @media only screen and (min-width: 992px) {
@@ -53,6 +54,7 @@
     cursor: pointer;
     transition: all 100ms;
     height: 2.6rem;
+    width: auto;
 }
 
 .nav_buttons img:hover {

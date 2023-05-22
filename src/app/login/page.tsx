@@ -7,8 +7,8 @@ import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
-import { login } from "@/actions/account"
 import { redirect } from "next/navigation"
+import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
 
@@ -16,12 +16,15 @@ export default function LoginPage() {
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        const res = await login({
+        const res = await signIn("credentials", {
+            redirect: false,
+            callbackUrl: "/home",
             email: fd.get("email") as string,
             password: fd.get("password") as string
         })
-        if (res) {
-            setErrorMsg("")
+        console.log(res)
+        setErrorMsg("")
+        if (!res?.error) {
             redirect("/home")
         }
         setErrorMsg("Invalid credentials")
