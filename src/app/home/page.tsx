@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import styles from "./styles.module.css"
 import smsIco from "../../../public/assets/icons/sms.svg"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function DashBoard() {
 
@@ -38,10 +39,10 @@ export default function DashBoard() {
                         </div>
                         <address className={styles.card_address_sect}>
                             <span className={styles.card_place}>Place</span>
-                            <div className={styles.card_contact_wrapper}>
+                            <Link href={"/message"} className={styles.card_contact_wrapper}>
                                 <Image src={smsIco} alt="sms message icon" className={styles.card_contact_img} />
                                 <span className={styles.card_contact_text}>Talk with the responsable</span>
-                            </div>
+                            </Link>
                         </address>
                     </div>
                 </div>
