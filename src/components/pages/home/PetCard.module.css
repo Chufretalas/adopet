@@ -1,0 +1,64 @@
+
+.pet_card {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr;
+    width: 25rem;
+    height: 10rem;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: var(--gray-bg-color);
+    color: var(--gray-text-color);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.145));
+}
+
+.card_img {
+    width: 90%;
+    height: auto;
+    padding: 2px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.card_info {
+    height: 90%;
+    padding: 0 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card_name {
+    color: var(--blue-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.card_basic_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card_address_sect {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.card_place {
+    font-size: 1.05rem;
+}
+
+.card_contact_wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
+}
+
+.card_contact_img {
+    height: 1.7rem;
+    width: auto;
+}
+
+
