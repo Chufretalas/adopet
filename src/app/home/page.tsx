@@ -8,17 +8,22 @@ import Image from "next/image"
 
 export default function DashBoard() {
 
-    const { data: session } = useSession()
+    const { data: session, status } = useSession({
+        required: true,
+        onUnauthenticated() {
+            redirect("/")
+        },
+    })
 
-    if (!session) {
-        redirect("/")
+    if (status === "loading") {
+        return (
+            <h1 className={styles.loading}>Wait just a second...</h1>
+        )
     }
 
-    console.log(session)
-    //TODO:make the styles for all of this and extract the card component
     return (
-        <div className={styles.main}> 
-            <h2 className={styles.catalog_title}>Hello! See some friends available for adoption.</h2>
+        <div className={styles.main}>
+            <h2 className={styles.catalog_title}>Hello {session.user?.name}! See some friends available for adoption.</h2>
             <section className={styles.catalog}>
                 <div className={styles.pet_card}>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMzQuG6SbfCTtBc2UqzaTvumyD_cEip51kupMitZ2kkiAGpehU2EYks6elpNy7D4XqY_U&usqp=CAU"

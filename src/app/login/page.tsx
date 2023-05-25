@@ -8,9 +8,16 @@ import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
 import { redirect } from "next/navigation"
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { stat } from "fs"
 
 export default function LoginPage() {
+
+    const {status} = useSession()
+
+    if (status === "authenticated") {
+        redirect("./home")
+    }
 
     const [errorMsg, setErrorMsg] = useState("")
     const [hiddenPassword, setHiddenPassword] = useState(true)

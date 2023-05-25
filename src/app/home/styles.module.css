@@ -1,3 +1,11 @@
+.loading {
+    display: flex;
+    height: 30vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .main {
     background-color: rgba(255, 0, 0, 0.142);
     width: 80%;
