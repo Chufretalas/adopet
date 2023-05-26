@@ -1,0 +1,1 @@
+export type TUserRole = "owner" | "adopter" //TODO: could be an enum

@@ -7,19 +7,26 @@ import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
-import { redirect } from "next/navigation"
+import { redirect, useSearchParams } from "next/navigation"
 import { signIn, useSession } from 'next-auth/react';
 import { stat } from "fs"
+import { useRouter } from "next/router"
 
 export default function LoginPage() {
 
-    const {status} = useSession()
+    const { status } = useSession()
+    const sParams = useSearchParams()
+
 
     if (status === "authenticated") {
         redirect("./home")
     }
 
     const [errorMsg, setErrorMsg] = useState("")
+
+    const needsLogin = sParams.has("needs-login")
+    console.log(needsLogin)
+
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
@@ -29,9 +36,13 @@ export default function LoginPage() {
             email: fd.get("email") as string,
             password: fd.get("password") as string
         })
-        console.log(res)
+        // console.log(res)
         setErrorMsg("")
         if (!res?.error) {
+            if (sParams.has("needs-login")) {
+                //TODO: maybe check if the URL is valid before redirecting
+                redirect(sParams.get("needs-login")!)
+            }
             redirect("/home")
         }
         setErrorMsg("Invalid credentials")
@@ -66,6 +77,7 @@ export default function LoginPage() {
                 </div>
                 <OrangeButton type="submit">Login</OrangeButton>
                 <p className={styles.error_msg}>{errorMsg}</p>
+                {needsLogin ? (<p className={styles.error_msg}>You need to login to access that page</p>) : (<></>)}
             </form>
         </div>
     )

@@ -1,4 +1,4 @@
-import { TUserRole } from "@/app/types/random_types"
+import { TUserRole } from "@/types/random_types"
 
 export interface ISignupInfo {
     name:  string

@@ -14,7 +14,7 @@ export default function DashBoard() {
     const { data: session, status } = useSession({
         required: true,
         onUnauthenticated() {
-            redirect("/")
+            redirect("/login?needs-login=/home")
         },
     })
 
@@ -28,7 +28,7 @@ export default function DashBoard() {
         <div className={styles.main}>
             <h2 className={styles.catalog_title}>Hello {session.user?.name}! See some friends available for adoption.</h2>
             <section className={styles.catalog}>
-                {[mockPet1, mockPet2, mockPet1].map(pet => <PetCard petData={pet} />)}
+                {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
             </section>
             <button onClick={() => signOut()}>signout</button>
         </div>
