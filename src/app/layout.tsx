@@ -32,7 +32,7 @@ export default function RootLayout({
             <Image src={logo} alt="adopet logo" color="black" className={styles.header_logo} />
           </Link>
           <div className={styles.nav_buttons}>
-            <Link href={"/"}>
+            <Link href={"/home"}>
               <Image src={homeIco} alt="Home icon" />
             </Link>
             <Image src={contactIco} alt="Contact icon" />

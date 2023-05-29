@@ -6,7 +6,7 @@ import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
-import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { redirect, useSearchParams } from "next/navigation"
 import { signIn, useSession } from 'next-auth/react';
 import { stat } from "fs"
@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     const [errorMsg, setErrorMsg] = useState("")
 
-    const needsLogin = sParams.has("needs-login")
+    const needsLogin = sParams.has("redirect")
     console.log(needsLogin)
 
     const [hiddenPassword, setHiddenPassword] = useState(true)
@@ -39,9 +39,9 @@ export default function LoginPage() {
         // console.log(res)
         setErrorMsg("")
         if (!res?.error) {
-            if (sParams.has("needs-login")) {
+            if (sParams.has("redirect")) {
                 //TODO: maybe check if the URL is valid before redirecting
-                redirect(sParams.get("needs-login")!)
+                redirect(sParams.get("redirect")!)
             }
             redirect("/home")
         }

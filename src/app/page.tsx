@@ -2,7 +2,7 @@ import styles from "./page.module.css"
 import Image from "next/image"
 import logo from "../../public/assets/images/logo_blue.svg"
 import illustration from "../../public/assets/images/illustratrion.svg"
-import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import Link from "next/link"
 
 export default function Home() {

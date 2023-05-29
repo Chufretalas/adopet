@@ -7,7 +7,7 @@ import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import { useState } from "react"
 import { createAccount } from "@/actions/account"
-import OrangeButton from "@/components/pages/OrangeButton/OrangeButton"
+import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
 import { redirect } from 'next/navigation';
 import { hashPass } from "@/util/pass_hash"
