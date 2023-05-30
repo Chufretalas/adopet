@@ -9,6 +9,8 @@ import Link from "next/link"
 import PetCard from "@/components/pages/home/PetCard"
 import { mockPet1, mockPet2 } from "@/util/mock_values"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
+import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
+import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 
 export default function DashBoard() {
 
@@ -21,7 +23,7 @@ export default function DashBoard() {
 
     if (status === "loading") {
         return (
-            <h1 className={styles.loading}>Wait just a second...</h1>
+            <LoadingMessage/>
         )
     }
 
@@ -29,7 +31,7 @@ export default function DashBoard() {
         <>
         <ProfileButton/>
         <div className={styles.main}>
-            <h2 className={styles.catalog_title}>Hello {session.user?.name}! See some friends available for adoption.</h2>
+            <PageHeaderText>Hello {session.user?.name}! See some friends available for adoption.</PageHeaderText>
             <section className={styles.catalog}>
                 {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
             </section>
