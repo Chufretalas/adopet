@@ -11,6 +11,7 @@ import { redirect, useSearchParams } from "next/navigation"
 import { signIn, useSession } from 'next-auth/react';
 import { stat } from "fs"
 import { useRouter } from "next/router"
+import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 
 export default function LoginPage() {
 
@@ -56,18 +57,18 @@ export default function LoginPage() {
             </div>
             <hr className={styles.hr} />
             <form action={handleForm} className={styles.form}>
-                <fieldset className={styles.fieldset}>
+                <DefaultFieldset>
                     <label htmlFor="email">Email</label>
                     <input type="email" placeholder="Your email here"
                         id="email" name="email" required />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
+                </DefaultFieldset>
+                <DefaultFieldset>
                     <label htmlFor="password">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Your beautiful and secure password"
                         minLength={8}
                         id="password" name="password" required />
-                </fieldset>
+                </DefaultFieldset>
                 <div className={styles.visibility_wrapper}>
                     <Image src={hiddenPassword ? hiddenIco : visibleIco}
                         alt="password visibility"

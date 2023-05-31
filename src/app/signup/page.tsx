@@ -11,6 +11,7 @@ import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
 import { redirect } from 'next/navigation';
 import { hashPass } from "@/util/pass_hash"
+import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 
 export default function SignupPage() {
 
@@ -47,15 +48,15 @@ export default function SignupPage() {
             </div>
             <hr className={styles.hr} />
             <form action={handleForm} className={styles.form}>
-                <fieldset className={styles.fieldset}>
+                <DefaultFieldset>
                     <label htmlFor="name">Name</label>
                     <input type="text" placeholder="Your full name here" name="name" id="name" required />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
+                </DefaultFieldset>
+                <DefaultFieldset>
                     <label htmlFor="email">Email</label>
                     <input type="email" placeholder="Your email here" name="email" id="email" required />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
+                </DefaultFieldset>
+                <DefaultFieldset>
                     <label htmlFor="password">Password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Please write a great password, please"
@@ -63,16 +64,16 @@ export default function SignupPage() {
                         name="password" id="password"
                         required
                     />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
+                </DefaultFieldset>
+                <DefaultFieldset>
                     <label htmlFor="confirm_pass">Confirm your password</label>
                     <input type={hiddenPassword ? "password" : "text"}
                         placeholder="Repeat your password"
                         minLength={8}
                         name="confirm_password" id="confirm_password"
                         required />
-                </fieldset>
-                <fieldset className={styles.fieldset}>
+                </DefaultFieldset>
+                <DefaultFieldset>
                     <span className={styles.radios_title}>Do you...</span>
                     <div className={styles.radios_wrapper}>
                         <div className={styles.radio_field}>
@@ -84,7 +85,7 @@ export default function SignupPage() {
                             <label htmlFor="owner">have pets to put for adoption</label>
                         </div>
                     </div>
-                </fieldset>
+                </DefaultFieldset>
                 <div className={styles.visibility_wrapper}>
                     <Image src={hiddenPassword ? hiddenIco : visibleIco}
                         alt="password visibility"
