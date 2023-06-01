@@ -10,7 +10,8 @@
     justify-items: center;
     background-color: var(--gray-bg-color);
     color: var(--gray-text-color);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.145));
+    border-radius: 10px;
+    filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.162));
 }
 
 .card_img {

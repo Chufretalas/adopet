@@ -1,0 +1,63 @@
+.main_wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    border-radius: 50px;
+    width: 70%;
+    margin: auto;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.232);
+}
+
+.img_and_desc {
+    margin: auto;
+}
+
+.img_and_desc:hover {
+    cursor: pointer;
+}
+
+.img_and_desc span {
+    display: block;
+    color: var(--orange-color);
+}
+
+.profile_title {
+    color: var(--gray-text-color);
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.profile_img {
+    width: 180px;
+    height: auto;
+    border-radius: 99999px;
+    box-shadow: 0 0 5px rgba(38, 38, 38, 0.305);
+    transition: all 300ms;
+}
+
+.profile_img:hover {
+    box-shadow: 0 0 8px rgba(38, 38, 38, 0.562);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    min-width: 80%;
+}
+
+.form fieldset label {
+    color: var(--blue-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.about_field {
+    resize: none;
+    height: 4rem;
+}
+
+.save_button {
+    margin: auto;
+}

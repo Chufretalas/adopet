@@ -25,6 +25,10 @@ export default function Profile() {
         )
     }
 
+    console.log(session.user?.email)
+
+    //TODO: try SWR to fetch the user data
+
     function handleForm(e: FormData) {
         console.log(e)
     }
@@ -32,32 +36,36 @@ export default function Profile() {
     return (
         <>
             <ProfileButton />
-            <DefaultPageWrapper headertext="This profile is what is shown to the people you send messages to.">
-                <h1>Profile</h1>
-                <form action={handleForm}>
-                    <DefaultFieldset className={styles.verde}>
+            <DefaultPageWrapper
+                headertext="This profile is what is shown to the people you send messages to."
+                innerClass={styles.main_wrapper}>
+                <h1 className={styles.profile_title}>Profile</h1>
+                <form action={handleForm} className={styles.form}>
+                    <DefaultFieldset className={styles.img_part}>
                         <label htmlFor="photo">Photo</label>
-                        <Image src={caovo} alt="profile picture"
-                            onClick={() => alert("jk, I don't have a place to store images yet 😭")} width={200} height={200} />
-                        <span>Click on the image to edit</span>
+                        <div className={styles.img_and_desc} onClick={() => alert("jk, I don't have a place to store images yet 😭")}>
+                            <Image src={caovo} alt="profile picture"
+                                className={styles.profile_img} />
+                            <span>Click on the image to edit</span>
+                        </div>
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="name">Name</label>
-                        <input type="text" id="name" />
+                        <input type="text" id="name" placeholder="you name here..."/>
                     </DefaultFieldset>
                     <DefaultFieldset>
-                        <label htmlFor="name">Telephone</label>
-                        <input type="text" id="name" />
+                        <label htmlFor="telephone">Telephone</label>
+                        <input type="text" id="telephone" placeholder="you know, so people can contact you and all that..."/>
                     </DefaultFieldset>
                     <DefaultFieldset>
-                        <label htmlFor="name">City</label>
-                        <input type="text" id="name" />
+                        <label htmlFor="city">City</label>
+                        <input type="text" id="city" placeholder="what city are you from?"/>
                     </DefaultFieldset>
                     <DefaultFieldset>
-                        <label htmlFor="name">About</label>
-                        <input type="text" id="name" />
+                        <label htmlFor="about">About</label>
+                        <textarea id="about"  cols={4} className={styles.about_field} placeholder="write something about you..."/>
                     </DefaultFieldset>
-                    <OrangeButton>Save</OrangeButton>
+                    <OrangeButton className={styles.save_button}>Save</OrangeButton>
                 </form>
             </DefaultPageWrapper>
         </>

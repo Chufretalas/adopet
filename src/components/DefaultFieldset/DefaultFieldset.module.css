@@ -8,14 +8,14 @@
     font-weight: 500;
 }
 
-.fieldset input {
+.fieldset input, .fieldset textarea {
     font-size: 1rem;
     padding: 0.5rem;
     font-family: var(--font-josefin);
-    border-style: solid;
+    border: 2px solid var(--dark-gray-color);
     border-radius: 10px;
 }
 
-.fieldset input::placeholder {
+.fieldset input::placeholder, .fieldset textarea::placeholder {
     font-family: var(--font-josefin);
 }
