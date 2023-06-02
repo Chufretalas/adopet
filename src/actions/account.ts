@@ -4,6 +4,7 @@ import { prisma } from "@/db"
 import { ILoginInfo, ISignupInfo } from "@/interfaces/forms"
 import { comparePass, hashPass } from "@/util/pass_hash"
 
+//TODO: create a blank profile for the user
 export async function createAccount(info: ISignupInfo): Promise<boolean> {
     const hashed = await hashPass(info.password)
     try {
