@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import * as dotenv from 'dotenv'
 import { prisma } from "@/db";
 import { comparePass } from "@/util/pass_hash";
+import type { NextAuthOptions } from "next-auth";
 
 dotenv.config()
 
@@ -35,10 +36,12 @@ const handler = NextAuth({
             },
         })
     ],
-    secret: process.env.JWT_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/login"
     },
 })
 
-export { handler as GET, handler as POST }
+const authOptions: NextAuthOptions = NextAuth(handler)
+
+export { handler as GET, handler as POST, authOptions }
