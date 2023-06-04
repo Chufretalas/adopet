@@ -10,9 +10,9 @@ import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { redirect, useSearchParams } from "next/navigation"
 import { useRouter } from "next/router"
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
+import { login } from "@/actions/account"
 
 export default function LoginPage() {
-
     const status: any = null
 
     const sParams = useSearchParams()
@@ -24,15 +24,14 @@ export default function LoginPage() {
     const [errorMsg, setErrorMsg] = useState("")
 
     const needsLogin = sParams.has("redirect")
-    console.log(needsLogin)
 
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        redirect("/home")
-        const res: any = null //TODO: make this work again
+        const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
         setErrorMsg("")
-        if (!res?.error) {
+        if (error === null) {
+            sessionStorage.setItem("token", token)
             if (sParams.has("redirect")) {
                 //TODO: maybe check if the URL is valid before redirecting
                 redirect(sParams.get("redirect")!)
