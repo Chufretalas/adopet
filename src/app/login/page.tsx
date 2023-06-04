@@ -8,16 +8,14 @@ import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { redirect, useSearchParams } from "next/navigation"
-import { signIn, useSession } from 'next-auth/react';
-import { stat } from "fs"
 import { useRouter } from "next/router"
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 
 export default function LoginPage() {
 
-    const { status } = useSession()
-    const sParams = useSearchParams()
+    const status: any = null
 
+    const sParams = useSearchParams()
 
     if (status === "authenticated") {
         redirect("./home")
@@ -31,13 +29,8 @@ export default function LoginPage() {
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     async function handleForm(fd: FormData) {
-        const res = await signIn("credentials", {
-            redirect: false,
-            callbackUrl: "/home",
-            email: fd.get("email") as string,
-            password: fd.get("password") as string
-        })
-        // console.log(res)
+        redirect("/home")
+        const res: any = null //TODO: make this work again
         setErrorMsg("")
         if (!res?.error) {
             if (sParams.has("redirect")) {

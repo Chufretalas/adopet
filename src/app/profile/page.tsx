@@ -1,6 +1,5 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import styles from "./styles.module.css"
 import { redirect } from "next/navigation"
 import DefaultPageWrapper from "@/components/DefaultPageWrapper/DefaultPageWrapper"
@@ -12,20 +11,14 @@ import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 
 export default function Profile() {
-    const { data: session, status } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect("/login?redirect=/home")
-        },
-    })
+    
+    const status: any = null
 
     if (status === "loading") {
         return (
             <LoadingMessage />
         )
     }
-
-    console.log(session.user?.email)
 
     //TODO: try SWR to fetch the user data
 

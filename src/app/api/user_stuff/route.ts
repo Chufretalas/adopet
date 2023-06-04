@@ -1,16 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { prisma } from "@/db";
 
-// Gets the logged in user info and profile
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-    const session = await getServerSession(authOptions)
+export async function GET(req: Request, res: Response) {
+    const session = null //TODO: get this working again
     console.log(session)
     if (session) {
         const user = await prisma.users.findFirst({
-            where: {// TODO: figure out how to put the id in the session data, so I can stop using the email 🫠
-                email: session.user?.email as string
+            where: {
+                id: 3
             },
             select: {
                 id: true,
