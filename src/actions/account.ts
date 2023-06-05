@@ -1,9 +1,10 @@
 "use server"
 
 import { prisma } from "@/db"
+import IJWTPayload from "@/interfaces/IJWTPayload"
 import { ILoginInfo, ISignupInfo } from "@/interfaces/forms"
 import { comparePass, hashPass } from "@/util/pass_hash"
-import jwt from "jsonwebtoken"
+import jwt, { JwtPayload } from "jsonwebtoken"
 
 //TODO: create a blank profile for the user
 export async function createAccount(info: ISignupInfo): Promise<boolean> {
@@ -42,7 +43,7 @@ export async function login(info: ILoginInfo): Promise<ILoginResponse> {
         if (user) {
             const passed = await comparePass(info.password.toString(), user.password)
             if (passed) {
-                const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.JWT_KEY as string, { expiresIn: "3h" })
+                const token = jwt.sign({ id: user.id, name: user.name, role: user.role }, process.env.JWT_PRIVATE as string, { expiresIn: "3h", algorithm: "ES512" })
                 return { token, error: null }
             }
         }
@@ -51,4 +52,14 @@ export async function login(info: ILoginInfo): Promise<ILoginResponse> {
     return { token: "", error: { message: "email and/or password not provided" } }
 }
 
-//TODO: validade jwt action
+export async function verifyJWT(token: string): Promise<IJWTPayload | null> {
+    try {
+        const result = jwt.verify(token, process.env.JWT_PUBLIC as string)
+        if (result) {
+            return result as IJWTPayload
+        }
+    } catch (e) {
+        console.log("token validation erroed")
+    }
+    return null
+}
