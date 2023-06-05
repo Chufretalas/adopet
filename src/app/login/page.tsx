@@ -13,13 +13,8 @@ import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 import { login } from "@/actions/account"
 
 export default function LoginPage() {
-    const status: any = null
 
     const sParams = useSearchParams()
-
-    if (status === "authenticated") {
-        redirect("./home")
-    }
 
     const [errorMsg, setErrorMsg] = useState("")
 
