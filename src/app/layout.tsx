@@ -1,6 +1,6 @@
 import "./reset.css"
 import './globals.css'
-import { Josefin_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import styles from "./layout.module.css"
 import Image from "next/image"
 import logo from "../../public/assets/images/logo.svg"
@@ -8,7 +8,12 @@ import homeIco from "../../public/assets/icons/home.svg"
 import contactIco from "../../public/assets/icons/mail.svg"
 import Link from "next/link"
 
-const josefin = Josefin_Sans({ subsets: ['latin'], variable: "--font-josefin" })
+const josefin = localFont({
+  src: [
+    { path: "../fonts/josefin_sans/JosefinSans-VariableFont_wght.ttf", style: "normal" },
+    { path: "../fonts/josefin_sans/JosefinSans-Italic-VariableFont_wght.ttf", style: "italic" }
+  ]
+})
 
 export const metadata = {
   title: 'Adopet',
