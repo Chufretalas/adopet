@@ -36,12 +36,14 @@ model pets {
 }
 
 model profiles {
-  id        Int       @id @default(autoincrement())
-  user_id   Int?
-  photo_url String?   @db.VarChar(255)
-  about     String?
-  created   DateTime? @default(now()) @db.Timestamptz(6)
-  users     users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id           Int       @id @default(autoincrement())
+  user_id      Int?      @unique(map: "user_id_unique")
+  photo_url    String?   @db.VarChar(255)
+  about        String?
+  created      DateTime? @default(now()) @db.Timestamptz(6)
+  phone_number String?   @db.VarChar(50)
+  city         String?   @db.VarChar(50)
+  users        users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model users {
@@ -50,13 +52,11 @@ model users {
   email                                String     @unique(map: "email_unique") @db.VarChar(90)
   password                             String     @db.VarChar(255)
   role                                 user_role
-  phone_number                         String?    @db.VarChar(50)
-  city                                 String?    @db.VarChar(50)
   created                              DateTime?  @default(now()) @db.Timestamptz(6)
   messages_messages_receiver_idTousers messages[] @relation("messages_receiver_idTousers")
   messages_messages_sender_idTousers   messages[] @relation("messages_sender_idTousers")
   pets                                 pets[]
-  profiles                             profiles[]
+  profiles                             profiles?
 }
 
 enum pet_size {
