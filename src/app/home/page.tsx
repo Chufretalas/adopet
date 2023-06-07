@@ -28,7 +28,7 @@ export default function DashBoard() {
         <>
             <ProfileButton />
             <div className={styles.main}>
-                <PageHeaderText>Hello {user!.name} See some friends available for adoption.</PageHeaderText>
+                <PageHeaderText>Hello {user!.name} see some friends available for adoption.</PageHeaderText>
                 <section className={styles.catalog}>
                     {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
                 </section>

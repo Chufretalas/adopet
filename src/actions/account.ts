@@ -10,7 +10,7 @@ import jwt, { JwtPayload } from "jsonwebtoken"
 export async function createAccount(info: ISignupInfo): Promise<boolean> {
     const hashed = await hashPass(info.password)
     try {
-        const res = await prisma.users.create({
+        const resUser = await prisma.users.create({
             data: {
                 name: info.name,
                 email: info.email,
@@ -18,9 +18,15 @@ export async function createAccount(info: ISignupInfo): Promise<boolean> {
                 password: hashed,
             }
         })
-        console.log(res)
-        if (res) {
-            return true
+        if (resUser) {
+            const resProfile = await prisma.profiles.create({
+                data: {
+                    user_id: resUser.id,
+                }
+            })
+            if (resProfile) {
+                return true
+            }
         }
     } catch (error: any) {
         console.log(error)

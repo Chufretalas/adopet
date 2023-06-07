@@ -6,7 +6,7 @@ import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import { useState } from "react"
-import { createAccount } from "@/actions/account"
+import { createAccount, login } from "@/actions/account"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
 import { redirect } from 'next/navigation';
@@ -35,6 +35,10 @@ export default function SignupPage() {
         })
         console.log(sucess)
         if (sucess) {
+            const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
+            if(error === null) {
+                window.sessionStorage.setItem("token", token)
+            }
             redirect("/home")
         }
     }
