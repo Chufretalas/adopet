@@ -37,7 +37,7 @@ export default function SignupPage() {
         if (sucess) {
             const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
             if(error === null) {
-                window.sessionStorage.setItem("token", token)
+                window.localStorage.setItem("token", token)
             }
             redirect("/home")
         }

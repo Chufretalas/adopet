@@ -7,14 +7,15 @@ import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
-import { redirect, useSearchParams } from "next/navigation"
-import { useRouter } from "next/router"
+import { useSearchParams, useRouter } from "next/navigation"
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 import { login } from "@/actions/account"
 
 export default function LoginPage() {
 
     const sParams = useSearchParams()
+
+    const router = useRouter()
 
     const [errorMsg, setErrorMsg] = useState("")
 
@@ -26,12 +27,13 @@ export default function LoginPage() {
         const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
         setErrorMsg("")
         if (error === null) {
-            sessionStorage.setItem("token", token)
+            localStorage.setItem("token", token)
+            await new Promise((resolve) => setTimeout(resolve, 5000))
             if (sParams.has("redirect")) {
                 //TODO: maybe check if the URL is valid before redirecting
-                redirect(sParams.get("redirect")!)
+                router.push(sParams.get("redirect")!)
             }
-            redirect("/home")
+            router.push("/home")
         }
         setErrorMsg("Invalid credentials")
     }

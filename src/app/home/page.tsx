@@ -6,10 +6,13 @@ import { mockPet1, mockPet2 } from "@/util/mock_values"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import useUser from "@/hooks/use_user"
+import useSWR from "swr"
+import fetchProfileStuff from "@/actions/fetch_profile_stuff"
+import { verifyJWT } from "@/actions/account"
 
-export default function DashBoard() {
+export default function Home() {
 
     const { user, error, isLoading } = useUser()
 
@@ -33,8 +36,8 @@ export default function DashBoard() {
                     {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
                 </section>
                 <button onClick={() => {
-                    window.sessionStorage.clear()
-                    console.log("token: " + sessionStorage.getItem("token"))
+                    window.localStorage.clear()
+                    console.log("token: " + localStorage.getItem("token"))
                     location.reload()
                 }}>signout</button>
             </div>
