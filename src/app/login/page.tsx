@@ -30,8 +30,9 @@ export default function LoginPage() {
             localStorage.setItem("token", token)
             await new Promise((resolve) => setTimeout(resolve, 5000))
             if (sParams.has("redirect")) {
+                console.log("aqui", sParams.get("redirect"))
                 //TODO: maybe check if the URL is valid before redirecting
-                router.push(sParams.get("redirect")!)
+                return router.push(sParams.get("redirect")!)
             }
             router.push("/home")
         }

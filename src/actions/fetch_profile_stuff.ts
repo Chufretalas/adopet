@@ -7,8 +7,8 @@ export default async function fetchProfileStuff(userId: number): Promise<IProfil
     try {
         const user = await prisma.users.findFirst({ where: { id: userId } })
         const profile = await prisma.profiles.findFirst({ where: { user_id: userId } })
-        console.log(user)
-        console.log(profile)
+        // console.log(user)
+        // console.log(profile)
         if (user && profile) {
             return {
                 user_id: user.id,

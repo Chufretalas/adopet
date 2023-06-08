@@ -11,6 +11,7 @@ import useUser from "@/hooks/use_user"
 import useSWR from "swr"
 import fetchProfileStuff from "@/actions/fetch_profile_stuff"
 import { verifyJWT } from "@/actions/account"
+import Link from "next/link"
 
 export default function Home() {
 
@@ -24,7 +25,12 @@ export default function Home() {
     }
 
     if (error && !user) {
-        redirect(`/login?redirect=/home`)
+        return (
+            <>
+                <h1>Needs to login</h1>
+                <Link href={`/login?redirect=home`}>here to get out</Link>
+            </>
+        )
     }
 
     return (

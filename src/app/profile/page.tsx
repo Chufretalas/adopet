@@ -12,6 +12,7 @@ import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import useUser from "@/hooks/use_user"
 import fetchProfileStuff from "@/actions/fetch_profile_stuff"
 import useSWR from "swr"
+import Link from "next/link"
 
 export default function Profile() {
 
@@ -34,10 +35,13 @@ export default function Profile() {
     }
 
     if (error && !user) {
-        redirect(`/login?redirect=/profile`)
+        return (
+            <> 
+                <h1>Needs to login</h1>
+                <Link href={`/login?redirect=profile`}>here to get out</Link>
+            </>
+        ) // beautify and componetize this thing
     }
-
-
 
     const profileData = profileResponse.data
     const profileError = profileResponse.error
