@@ -12,6 +12,7 @@ import useUser from "@/hooks/use_user"
 import fetchProfileStuff from "@/actions/fetch_profile_stuff"
 import useSWR from "swr"
 import Link from "next/link"
+import updateProfile from "@/actions/update_profile"
 
 export default function Profile() {
 
@@ -35,11 +36,11 @@ export default function Profile() {
 
     if (error && !user) {
         return (
-            <> 
+            <>
                 <h1>Needs to login</h1>
                 <Link href={`/login?redirect=profile`}>here to get out</Link>
             </>
-        ) // beautify and componetize this thing
+        ) //TODO: beautify and componetize this thing
     }
 
     const profileData = profileResponse.data
@@ -52,8 +53,15 @@ export default function Profile() {
         )
     }
 
-    function handleForm(e: FormData) {
-        console.log(e)
+    async function handleForm(fd: FormData) {
+        await updateProfile({
+            user_id: user!.id,
+            // photoUrl: e.get() as string,
+            name: fd.get("name") as string,
+            phoneNumber: fd.get("phone_number") as string,
+            city: fd.get("city") as string,
+            about: fd.get("about") as string
+        }) //TODO: show a success message after updating the profile
     }
 
     return (
@@ -74,30 +82,30 @@ export default function Profile() {
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="name">Name</label>
-                        <input type="text" id="name"
+                        <input type="text" id="name" name="name"
                             defaultValue={profileData?.name ?? ""}
                             placeholder="you name here..." />
                     </DefaultFieldset>
                     <DefaultFieldset>
-                        <label htmlFor="telephone">Telephone</label>
-                        <input type="text" id="telephone"
+                        <label htmlFor="phone_number">Telephone</label>
+                        <input type="text" id="phone_number" name="phone_number"
                             defaultValue={profileData?.phoneNumber ?? ""}
                             placeholder="you know, so people can contact you and all that..." />
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="city">City</label>
-                        <input type="text" id="city"
+                        <input type="text" id="city" name="city"
                             defaultValue={profileData?.city ?? ""}
                             placeholder="what city are you from?" />
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="about">About</label>
-                        <textarea id="about" cols={4}
+                        <textarea id="about" name="about" cols={4}
                             defaultValue={profileData?.about ?? ""}
                             className={styles.about_field}
                             placeholder="write something about you..." />
                     </DefaultFieldset>
-                    <OrangeButton className={styles.save_button}>Save</OrangeButton>
+                    <OrangeButton className={styles.save_button} type="submit">Save</OrangeButton>
                 </form>
             </DefaultPageWrapper>
         </>
