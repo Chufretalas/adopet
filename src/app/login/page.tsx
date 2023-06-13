@@ -9,7 +9,7 @@ import Image from "next/image"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { useSearchParams, useRouter } from "next/navigation"
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
-import { login } from "@/actions/account"
+import login from "@/actions/login"
 
 export default function LoginPage() {
 
@@ -28,9 +28,7 @@ export default function LoginPage() {
         setErrorMsg("")
         if (error === null) {
             localStorage.setItem("token", token)
-            await new Promise((resolve) => setTimeout(resolve, 5000))
             if (sParams.has("redirect")) {
-                console.log("aqui", sParams.get("redirect"))
                 //TODO: maybe check if the URL is valid before redirecting
                 return router.push(sParams.get("redirect")!)
             }

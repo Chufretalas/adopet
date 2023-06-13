@@ -1,6 +1,6 @@
 "use client"
 
-import { verifyJWT } from "@/actions/account"
+import verifyJWT from "@/actions/verify_jwt"
 import useSWR from "swr"
 
 export default function useUser() {

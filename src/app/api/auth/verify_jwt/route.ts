@@ -1,4 +1,5 @@
-import { verifyJWT } from "@/actions/account";
+
+import verifyJWT from "@/actions/verify_jwt";
 import jsonResponse from "@/util/json_response";
 
 export async function POST(req: Request, res: Response) {

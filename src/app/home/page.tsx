@@ -6,11 +6,7 @@ import { mockPet1, mockPet2 } from "@/util/mock_values"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
-import { redirect, useRouter } from "next/navigation"
 import useUser from "@/hooks/use_user"
-import useSWR from "swr"
-import fetchProfileStuff from "@/actions/fetch_profile_stuff"
-import { verifyJWT } from "@/actions/account"
 import Link from "next/link"
 
 export default function Home() {

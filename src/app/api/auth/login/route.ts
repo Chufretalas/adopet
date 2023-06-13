@@ -1,11 +1,6 @@
 import jsonResponse from "@/util/json_response";
-import { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-import { prisma } from "@/db";
-import bcrypt from "bcrypt"
-import { comparePass } from "@/util/pass_hash";
-import { login } from "@/actions/account";
+import dotenv from "dotenv";
+import login from "@/actions/login";
 
 dotenv.config()
 

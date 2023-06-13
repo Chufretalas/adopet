@@ -6,12 +6,12 @@ import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import { useState } from "react"
-import { createAccount, login } from "@/actions/account"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
-import { redirect } from 'next/navigation';
-import { hashPass } from "@/util/pass_hash"
+import { redirect } from 'next/navigation'
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
+import { createAccount } from "@/actions/create_account"
+import login from "@/actions/login"
 
 export default function SignupPage() {
 
@@ -36,7 +36,7 @@ export default function SignupPage() {
         console.log(sucess)
         if (sucess) {
             const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
-            if(error === null) {
+            if (error === null) {
                 window.localStorage.setItem("token", token)
             }
             redirect("/home")

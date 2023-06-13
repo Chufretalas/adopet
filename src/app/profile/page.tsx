@@ -1,7 +1,6 @@
 "use client"
 
 import styles from "./styles.module.css"
-import { redirect } from "next/navigation"
 import DefaultPageWrapper from "@/components/DefaultPageWrapper/DefaultPageWrapper"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
