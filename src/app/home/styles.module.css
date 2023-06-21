@@ -1,3 +1,8 @@
+.new_pet_button {
+    display: block;
+    margin: 1rem auto;
+}
+
 .main {
     /* background-color: rgba(255, 0, 0, 0.142); */
     width: 80%;

@@ -1,5 +1,5 @@
 .header {
-    position: sticky;
+    position: relative;
     top: 0;
     background-color: var(--accent-color);
     display: grid;

@@ -18,7 +18,7 @@ export default async function updateProfile(data: IProfilePageData): Promise<boo
         })
         const userUpRes = await prisma.users.update({
             data: {
-                name: data.name === undefined || data.name === "" ? old_user.name : data.name
+                name: data.name === undefined || data.name === "" ? old_user.name : data.name //TODO: do this verification to all fields (might be important for the api)
             },
             where: { id: data.user_id }
         })

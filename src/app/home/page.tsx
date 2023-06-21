@@ -8,6 +8,7 @@ import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import useUser from "@/hooks/use_user"
 import Link from "next/link"
+import OrangeButton from "@/components/OrangeButton/OrangeButton"
 
 export default function Home() {
 
@@ -29,10 +30,15 @@ export default function Home() {
         )
     }
 
+    console.log(user)
+
     return (
         <>
             <ProfileButton />
             <div className={styles.main}>
+                {user!.role === "owner" ? <OrangeButton
+                    className={styles.new_pet_button}
+                    onClick={() => { console.log("foi") }}>🐶 Click here to new pet up for adoption 😸</OrangeButton> : <></>}
                 <PageHeaderText>Hello {user!.name} see some friends available for adoption.</PageHeaderText>
                 <section className={styles.catalog}>
                     {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
