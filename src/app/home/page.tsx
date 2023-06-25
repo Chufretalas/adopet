@@ -9,10 +9,13 @@ import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import useUser from "@/hooks/use_user"
 import Link from "next/link"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
+import NewPetDialog from "@/components/NewPetDialog/NewPetDialog"
+import { useRef, useState } from "react"
 
 export default function Home() {
 
     const { user, error, isLoading } = useUser()
+    const [isOpened, setIsOpened] = useState<boolean>(false)
 
 
     if (isLoading) {
@@ -30,7 +33,10 @@ export default function Home() {
         )
     }
 
-    console.log(user)
+    async function handleNewPetButton() {
+        setIsOpened(true)
+    }
+
 
     return (
         <>
@@ -38,7 +44,7 @@ export default function Home() {
             <div className={styles.main}>
                 {user!.role === "owner" ? <OrangeButton
                     className={styles.new_pet_button}
-                    onClick={() => { console.log("foi") }}>🐶 Click here to new pet up for adoption 😸</OrangeButton> : <></>}
+                    onClick={handleNewPetButton}>🐶 Click here to new pet up for adoption 😸</OrangeButton> : <></>}
                 <PageHeaderText>Hello {user!.name} see some friends available for adoption.</PageHeaderText>
                 <section className={styles.catalog}>
                     {[mockPet1, mockPet2, mockPet1].map((pet, index) => <PetCard key={index} petData={pet} />)}
@@ -49,6 +55,8 @@ export default function Home() {
                     location.reload()
                 }}>signout</button>
             </div>
+            <NewPetDialog isOpened={isOpened}
+                onClose={() => setIsOpened(false)} />
         </>
     )
 }
