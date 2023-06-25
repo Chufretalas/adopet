@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.fieldset label {
+.fieldset label, .fieldset span {
     font-size: 1.1rem;
     font-weight: 500;
 }

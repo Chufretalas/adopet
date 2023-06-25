@@ -1,0 +1,28 @@
+.dialog {
+    min-width: 400px;
+    border-radius: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.close_button {
+    border-radius: 999999px;
+    height: 26px;
+    width: 26px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: black;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    transition: all 200ms;
+}   
+
+.close_button:hover {
+    background-color: rgb(208, 208, 208);
+}
