@@ -55,7 +55,8 @@ export default function Home() {
                     location.reload()
                 }}>signout</button>
             </div>
-            <NewPetDialog isOpened={isOpened}
+            <NewPetDialog
+                isOpened={isOpened}
                 onClose={() => setIsOpened(false)} />
         </>
     )
