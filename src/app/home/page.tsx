@@ -57,7 +57,8 @@ export default function Home() {
             </div>
             <NewPetDialog
                 isOpened={isOpened}
-                onClose={() => setIsOpened(false)} />
+                onClose={() => setIsOpened(false)}
+                userId={user!.id} />
         </>
     )
 }
