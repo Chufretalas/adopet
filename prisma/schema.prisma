@@ -24,7 +24,7 @@ model pets {
   id          Int       @id @default(autoincrement())
   owner_id    Int?
   name        String    @db.VarChar(100)
-  birthday    Int
+  birthday    BigInt
   city        String    @db.VarChar(50)
   state       String    @db.VarChar(50)
   size        pet_size

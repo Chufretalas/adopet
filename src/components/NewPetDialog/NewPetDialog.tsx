@@ -18,12 +18,16 @@ export default function NewPetDialog({ isOpened, onClose, userId }: { isOpened: 
 
     async function handleForm(fd: FormData) {
         const name = fd.get("name") as string
-        const birthday  = new Date(fd.get("birthday") as string)
+        const birthday = new Date(fd.get("birthday") as string)
         const state = fd.get("state") as string
         const city = fd.get("city") as string
         const size = fd.get("pet_size") as PetSize
         const personality = fd.get("personality") as string
         const res = await createPet(userId, name, birthday, city, state, size, personality)
+        if (res) {
+            onClose()
+            return
+        }
         //TODO: validade the form data, such as the birthday that cannot be in the future
     }
 
@@ -57,12 +61,12 @@ export default function NewPetDialog({ isOpened, onClose, userId }: { isOpened: 
                 <DefaultFieldset>
                     <span>How big is this pet?</span>
                     <div>
-                        <PetSizeRadioSet id="small" value="small" defaultChecked={true} />
-                        <PetSizeRadioSet id="medium/small" value="medium/small" />
-                        <PetSizeRadioSet id="medium" value="medium" />
-                        <PetSizeRadioSet id="medium/large" value="medium/large" />
-                        <PetSizeRadioSet id="large" value="large" />
-                        <PetSizeRadioSet id="very_big" value="very big" />
+                        <PetSizeRadioSet id="small" value={PetSize.Sm} defaultChecked={true} />
+                        <PetSizeRadioSet id="medium/small" value={PetSize.MdSm} />
+                        <PetSizeRadioSet id="medium" value={PetSize.Md} />
+                        <PetSizeRadioSet id="medium/large" value={PetSize.MdLg} />
+                        <PetSizeRadioSet id="large" value={PetSize.Lg} />
+                        <PetSizeRadioSet id="very_big" value={PetSize.Xl} />
                     </div>
                 </DefaultFieldset>
                 {/* <DefaultFieldset> // TODO: pet img maybe sometime
