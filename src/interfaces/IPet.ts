@@ -2,14 +2,14 @@ export interface IPet {
     id: number;
     owner_id: number | null;
     name: string;
-    days_old: number;
+    birthday: BigInt;
     city: string;
     state: string;
     size: PetSize;
-    personality: string;
-    photo_url?: string;
+    personality: string | null;
+    photo_url: string | null;
     available: boolean;
-    created: Date;
+    created: Date | null;
   }
   
 export enum PetSize {

@@ -13,7 +13,7 @@ export default function PetCard({ petData }: { petData: IPet }) {
             <div className={styles.card_info}>
                 <h3 className={styles.card_name}>{petData.name}</h3>
                 <div className={styles.card_basic_info}>
-                    <span className={styles.card_plain_text}>Age: {petData.days_old} days old</span>
+                    <span className={styles.card_plain_text}>Age: {petData.birthday} days old</span>
                     <span className={styles.card_plain_text}>Size: {petData.size}</span>
                     <span className={styles.card_plain_text}>Personality: {petData.personality.split(" ").join(" and ")}</span>
                 </div>

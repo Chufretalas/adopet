@@ -2,8 +2,7 @@
 
 import { prisma } from "@/db";
 import { PetSize } from "@/interfaces/IPet";
-import getPrismaPetSize from "@/util/getPrismaPetSize";
-import { pet_size } from "@prisma/client";
+import {toPrismaSize} from "@/util/pet_size_conversion";
 
 export default async function createPet(
     ownerId: number,
@@ -31,7 +30,7 @@ export default async function createPet(
                 city: city,
                 state: state,
                 available: true,
-                size: getPrismaPetSize(size), //TODO: I seen to have two implementations of the pet_size type, maybe a should only use the prisma one
+                size: toPrismaSize(size), //TODO: I seen to have two implementations of the pet_size type, maybe a should only use the prisma one
                 photo_url: photoUrl,
                 personality: personality
             }
