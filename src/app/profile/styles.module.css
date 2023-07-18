@@ -60,4 +60,7 @@
 
 .save_button {
     margin: auto;
+    width: 10rem;
+    font-weight: bold;
+    font-size: 1.1rem;
 }

@@ -64,7 +64,7 @@ export default function LoginPage() {
                         onClick={() => setHiddenPassword(!hiddenPassword)} />
                     <p>Show password</p>
                 </div>
-                <OrangeButton type="submit">Login</OrangeButton>
+                <OrangeButton type="submit" className={styles.button}>Login</OrangeButton>
                 <p className={styles.error_msg}>{errorMsg}</p>
                 {needsLogin ? (<p className={styles.error_msg}>You need to login to access that page</p>) : (<></>)}
             </form>

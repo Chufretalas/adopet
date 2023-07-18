@@ -97,7 +97,7 @@ export default function SignupPage() {
                         onClick={() => setHiddenPassword(!hiddenPassword)} />
                     <p>Show password</p>
                 </div>
-                <OrangeButton type="submit">Register</OrangeButton>
+                <OrangeButton type="submit" className={styles.button}>Register</OrangeButton>
                 <p className={styles.error_msg}>{errorMsg}</p>
             </form>
         </div>

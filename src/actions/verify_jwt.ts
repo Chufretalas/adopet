@@ -9,8 +9,8 @@ export default async function verifyJWT(token: string): Promise<IJWTPayload | nu
         if (result) {
             return result as IJWTPayload
         }
-    } catch (e) {
-        console.log("token validation erroed")
+    } catch (e: any) {
+        console.log("invalid token: ", e.message)
     }
     return null
 }

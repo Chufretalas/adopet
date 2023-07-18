@@ -12,6 +12,7 @@ import NewPetDialog from "@/components/NewPetDialog/NewPetDialog"
 import { useState } from "react"
 import useSWR from "swr"
 import fetchPetsForHome from "@/actions/fetch_pets_for_home"
+import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
 
 export default function Home() {
 
@@ -37,10 +38,7 @@ export default function Home() {
 
     if (error && !user) {
         return (
-            <>
-                <h1>Needs to login</h1>
-                <Link href={`/login?redirect=home`}>here to get out</Link>
-            </>
+            <NeedsToLogin redirect="home"/>
         )
     }
 
@@ -66,11 +64,6 @@ export default function Home() {
                 <section className={styles.catalog}>
                     {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} />)}
                 </section>
-                <button onClick={() => {
-                    window.localStorage.clear()
-                    console.log("token: " + localStorage.getItem("token"))
-                    location.reload()
-                }}>signout</button>
             </div>
             <NewPetDialog
                 isOpened={isOpened}

@@ -13,6 +13,7 @@ import fetchProfileStuff from "@/actions/fetch_profile_stuff"
 import useSWR from "swr"
 import Link from "next/link"
 import updateProfile from "@/actions/update_profile"
+import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
 
 export default function Profile() {
 
@@ -35,16 +36,10 @@ export default function Profile() {
     }
 
     if (error && !user) {
-        return (
-            <>
-                <h1>Needs to login</h1>
-                <Link href={`/login?redirect=profile`}>here to get out</Link>
-            </>
-        ) //TODO: beautify and componetize this thing
+        return <NeedsToLogin redirect="profile"/>
     }
 
     const profileData = profileResponse.data
-    const profileError = profileResponse.error
     const profileIsLoading = profileResponse.isLoading
 
     if (profileIsLoading || !profileData) {
@@ -62,6 +57,7 @@ export default function Profile() {
             city: fd.get("city") as string,
             about: fd.get("about") as string
         }) //TODO: show a success message after updating the profile
+        profileResponse.mutate()
     }
 
     return (
