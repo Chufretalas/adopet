@@ -11,28 +11,28 @@ model messages {
   id                                Int       @id @default(autoincrement())
   sender_id                         Int?
   receiver_id                       Int?
-  sender_name                       String    @db.VarChar(120)
-  sender_phone_number               String    @db.VarChar(50)
-  pet_name                          String    @db.VarChar(100)
+  pet_id                            Int?
   message                           String
   created                           DateTime? @default(now()) @db.Timestamptz(6)
+  pets                              pets?     @relation(fields: [pet_id], references: [id], onUpdate: NoAction)
   users_messages_receiver_idTousers users?    @relation("messages_receiver_idTousers", fields: [receiver_id], references: [id], onUpdate: NoAction)
   users_messages_sender_idTousers   users?    @relation("messages_sender_idTousers", fields: [sender_id], references: [id], onUpdate: NoAction)
 }
 
 model pets {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   owner_id    Int?
-  name        String    @db.VarChar(100)
+  name        String     @db.VarChar(100)
   birthday    BigInt
-  city        String    @db.VarChar(50)
-  state       String    @db.VarChar(50)
+  city        String     @db.VarChar(50)
+  state       String     @db.VarChar(50)
   size        pet_size
-  personality String?   @db.VarChar(100)
-  photo_url   String?   @db.VarChar(255)
-  available   Boolean   @default(true)
-  created     DateTime? @default(now()) @db.Timestamptz(6)
-  users       users?    @relation(fields: [owner_id], references: [id], onUpdate: NoAction)
+  personality String?    @db.VarChar(100)
+  photo_url   String?    @db.VarChar(255)
+  available   Boolean    @default(true)
+  created     DateTime?  @default(now()) @db.Timestamptz(6)
+  messages    messages[]
+  users       users?     @relation(fields: [owner_id], references: [id], onUpdate: NoAction)
 }
 
 model profiles {

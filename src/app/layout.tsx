@@ -38,7 +38,9 @@ export default function RootLayout({
             <Link href={"/home"}>
               <Image src={homeIco} alt="Home icon" />
             </Link>
-            <Image src={contactIco} alt="Contact icon" />
+            <Link href={"/messages"}>
+              <Image src={contactIco} alt="Contact icon" />
+            </Link>
           </div>
         </header>
         <main className={styles.main}>
@@ -46,7 +48,9 @@ export default function RootLayout({
         </main>
         <footer className={styles.footer}>
           <div className={styles.footer_content}>
-            2023 -Developed by Chufretalas
+            <Link href="https://github.com/Chufretalas/adopet" target="blank">
+              2023 -Developed by Chufretalas
+            </Link>
           </div>
         </footer>
       </body>
