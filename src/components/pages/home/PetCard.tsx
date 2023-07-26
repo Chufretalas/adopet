@@ -22,7 +22,7 @@ export default function PetCard({ petData }: { petData: IPet }) {
                 </div>
                 <address className={styles.card_address_sect}>
                     <span className={styles.card_place}>At: {petData.city} {`(${petData.state})`}</span>
-                    <Link href={`/message?other=${petData.owner_id}&pet=${petData.id}`} className={styles.card_contact_wrapper}>
+                    <Link href={`/messages/${petData.owner_id}`} className={styles.card_contact_wrapper}>
                         <Image src={smsIco} alt="sms message icon" className={styles.card_contact_img} />
                         <span className={styles.card_contact_text}>Talk with the responsable</span>
                     </Link>

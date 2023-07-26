@@ -14,7 +14,7 @@ import styles from "./styles.module.css"
 export default function Messages() {
     const { user, error, isLoading } = useUser()
 
-    const dataResponse = useSWR("fetchPetsForCards",
+    const dataResponse = useSWR("fetchMessagesPreviews",
         async () => {
             const data = await fetchMessagesForMessagesPage(user!.id)
             if (data) {
@@ -53,7 +53,7 @@ export default function Messages() {
                             ? <span>You never messaged anyone</span>
                             : dataResponse.data.map((msg, index) => (
                                 <li className={styles.messagePreviewCard}>
-                                    <Link href={`message?other=${msg.otherId}`} key={index}>
+                                    <Link href={`messages/${msg.otherId}`} key={index}>
                                         <span>{msg.OtherName}</span>
                                         <span>Messages: {msg.messagesNumber}</span>
                                     </Link>
