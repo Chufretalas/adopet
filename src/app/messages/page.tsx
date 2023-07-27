@@ -31,7 +31,7 @@ export default function Messages() {
     }
 
     if (error && !user) {
-        return <NeedsToLogin redirect="profile" />
+        return <NeedsToLogin redirect="messages" />
     }
 
     if (dataResponse.isLoading || !dataResponse.data) {

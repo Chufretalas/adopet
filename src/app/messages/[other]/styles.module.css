@@ -1,4 +1,92 @@
 .pageWrapperInner {
     border-radius: 50px;
     filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.162));
+    height: 70vh;
+    padding: 1rem 20%;
+    display: grid;
+    grid-template-rows: 10fr 1fr;
+}
+
+.chatbox {
+    /* background-color: red; */
+}
+
+.other_msg, .your_msg {
+    width: 40%;
+    border-radius: 30px;
+    padding: 0.5rem;
+}
+
+.other_msg {
+    margin-left: 0;
+    margin-right: auto;
+    background-color: var(--dark-gray-color);
+    color: white;
+}
+
+.your_msg {
+    margin-left: auto;
+    margin-right: 0;
+    background-color: var(--blue-color);
+    color: white;
+}
+
+.your_content, .other_content {
+    display: block;
+    margin-bottom: 0.1rem;
+    padding-left: 0.2rem;
+}
+
+.your_date, .other_date {
+    display: block;
+    font-size: 0.7rem;
+    text-align: end;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    height: 52px;
+}
+
+.form_textarea {
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-family: var(--font-josefin);
+    border: 2px solid var(--dark-gray-color);
+    border-radius: 10px;
+    resize: none;
+}
+
+.form_textarea::placeholder {
+    font-family: var(--font-josefin);
+}
+
+.form_button {
+    border-radius: 9999999px;
+    width: 52px;
+    height: 52px;
+    margin-left: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-color);
+    border: none;
+    transition: all 200ms;
+}
+
+.form_button:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 3px rgba(1, 9, 7, 0.4));
+}
+
+.sendIco {
+    height: 80%;
+    width: auto;
+    filter: invert();
+    transition: all 200ms;
+}
+
+.sendIco:hover {
+    height: 85%;
 }
