@@ -8,7 +8,7 @@ export default function useUser() {
         "use_user",
         async () => {
             const token = window.localStorage.getItem("token")
-            console.log("token " + token)
+            // console.log("token " + token)
             if (token) {
                 const user = await verifyJWT(token as string)
                 if (user) {
