@@ -8,7 +8,7 @@ import useUser from "@/hooks/use_user"
 import styles from "./styles.module.css"
 import fetchConversation from "@/actions/fetch_conversation"
 import { redirect } from "next/navigation"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
 import sendIco from "../../../../public/assets/icons/send.svg"
 import sendMessage from "@/actions/send_message"
@@ -18,11 +18,16 @@ export default function MessageOther({ params }: { params: { other: number } }) 
 
     const otherId = +params.other
 
-    const newMessage = useRef<HTMLTextAreaElement>(null)
+    const newMessage = useRef<HTMLInputElement>(null)
+    const chatbox = useRef<HTMLOListElement>(null)
 
     if (!Number.isInteger(otherId)) {
         redirect("/messages")
     }
+
+    useEffect(()=> {
+        chatbox.current?.scrollTo(0, chatbox.current.scrollHeight)
+    })
 
     const { user, error, isLoading } = useUser()
 
@@ -62,6 +67,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
             if (success) {
                 newMessage.current!.value = ""
                 dataResponse.mutate()
+                chatbox.current?.scrollTo(0, chatbox.current.scrollHeight)
             }
         }
     }
@@ -71,11 +77,11 @@ export default function MessageOther({ params }: { params: { other: number } }) 
             <ProfileButton />
             <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
                 innerClass={styles.pageWrapperInner}>
-                <div className={styles.chatbox}>
+                <ol className={styles.chatbox} ref={chatbox}>
                     {dataResponse.data.messages.map(msg => {
                         if (msg.sender_id === otherId) {
                             return (
-                                <div className={styles.other_msg} key={msg.id}>
+                                <li className={styles.other_msg} key={msg.id}>
 
                                     <span className={styles.other_content}>{msg.message}</span>
                                     <span className={styles.other_date}>
@@ -84,11 +90,11 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                                             timeStyle: "short",
                                         })}
                                     </span>
-                                </div>
+                                </li>
                             )
                         }
                         return (
-                            <div className={styles.your_msg} key={msg.id}>
+                            <li className={styles.your_msg} key={msg.id}>
                                 <span className={styles.your_content}>{msg.message}</span>
                                 <span className={styles.your_date}>
                                     Sent: {msg.created?.toLocaleString("en-US", {
@@ -96,14 +102,14 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                                         timeStyle: "short",
                                     })}
                                 </span>
-                            </div>
+                            </li>
                         )
                     })}
-                </div>
+                </ol>
                 <form action={handleForm} className={styles.form}>
-                    <textarea name="new_message" id="new_message"
-                        cols={30} rows={2}
-                        className={styles.form_textarea}
+                    <input name="new_message" id="new_message"
+                        type="text"
+                        className={styles.form_input}
                         ref={newMessage}
                         placeholder="write a nice message..." />
                     <button type="submit" className={styles.form_button}>

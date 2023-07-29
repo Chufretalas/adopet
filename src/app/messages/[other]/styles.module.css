@@ -52,18 +52,21 @@
     display: grid;
     grid-template-columns: 9fr 1fr;
     height: 52px;
+    align-items: center;
+    justify-content: center;
 }
 
-.form_textarea {
-    font-size: 1rem;
+.form_input {
+    font-size: 1.1rem;
     padding: 0.5rem;
     font-family: var(--font-josefin);
     border: 2px solid var(--dark-gray-color);
     border-radius: 10px;
-    resize: none;
+    height: 50%;
+
 }
 
-.form_textarea::placeholder {
+.form_input::placeholder {
     font-family: var(--font-josefin);
 }
 
