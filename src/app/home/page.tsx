@@ -20,7 +20,7 @@ export default function Home() {
 
     const petsResponse = useSWR("fetchPetsForCards",
         async () => {
-            const data = await fetchPetsForHome()
+            const data = await fetchPetsForHome(user!.id)
             if (data) {
                 return data
             }

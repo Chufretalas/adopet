@@ -1,3 +1,12 @@
+.disclaimer {
+  position: absolute;
+  top: 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: red;
+  width: 50%;
+}
+
 .main {
   border-radius: 3rem;
   color: var(--blue-color);

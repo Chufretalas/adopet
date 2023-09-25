@@ -8,6 +8,7 @@ import Link from "next/link"
 export default function Home() {
   return (
     <div className={styles.main}>
+      <span className={styles.disclaimer}>Disclaimer! This site is just a portfolio project, it's not meant to be used as way to find pets to adopt or anything that relates to the apparent usage of this site.</span>
       <div className={styles.logo_greetings}>
         <Image src={logo} alt="adopet logo" />
         <h1>Welcome!</h1>

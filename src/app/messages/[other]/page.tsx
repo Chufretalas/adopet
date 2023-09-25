@@ -25,7 +25,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
         redirect("/messages")
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         chatbox.current?.scrollTo(0, chatbox.current.scrollHeight)
     })
 
@@ -53,7 +53,8 @@ export default function MessageOther({ params }: { params: { other: number } }) 
 
     if (dataResponse.isLoading || !dataResponse.data) {
         return (
-            <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`} innerClass={styles.pageWrapperInner}>
+            <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
+                innerClass={styles.pageWrapperInner}>
                 <LoadingMessage customMessage="loading messages..."></LoadingMessage>
             </DefaultPageWrapper>
 
