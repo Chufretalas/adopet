@@ -5,7 +5,7 @@ import { IPet } from "@/interfaces/IPet"
 import { fromPrismaSize } from "@/util/pet_size_conversion"
 
 export default async function fetchPetsForHome(userId: number): Promise<IPet[]> {
-    console.log(userId)
+    // console.log(userId)
     const res = await prisma.pets.findMany({
         where: {
             owner_id: {
