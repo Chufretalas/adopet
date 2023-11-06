@@ -1,10 +1,15 @@
 import styles from "./PetCard.module.css"
-import smsIco from "../../../../public/assets/icons/sms.svg"
+import smsIco from "../../../public/assets/icons/sms.svg"
 import Image from "next/image"
 import Link from "next/link"
 import { IPet } from "@/interfaces/IPet"
+import OrangeButton from "../OrangeButton/OrangeButton"
 
-export default function PetCard({ petData }: { petData: IPet }) {
+/**
+ * If ownerMode is true, handleEdit and handleDelete should be present
+ */
+export default function PetCard({ petData, ownerMode = false, handleEdit, handleDelete }
+    : { petData: IPet, ownerMode: boolean, handleEdit?: (petData: IPet) => any, handleDelete?: (petData: IPet) => any }) {
 
     const age = Math.floor((Date.now() - Number(petData.birthday)) / (1000 * 60 * 60 * 24))
 
@@ -22,10 +27,16 @@ export default function PetCard({ petData }: { petData: IPet }) {
                 </div>
                 <address className={styles.card_address_sect}>
                     <span className={styles.card_place}>At: {petData.city} {`(${petData.state})`}</span>
-                    <Link href={`/messages/${petData.owner_id}`} className={styles.card_contact_wrapper}>
-                        <Image src={smsIco} alt="sms message icon" className={styles.card_contact_img} />
-                        <span className={styles.card_contact_text}>Talk with the responsable</span>
-                    </Link>
+                    {ownerMode && handleDelete && handleEdit
+                        ? <div className={styles.owner_mode_buttons_wrapper}>
+                            <OrangeButton className={styles.owner_mode_button} onClick={() => handleEdit(petData)}>Edit 📝</OrangeButton>
+                            <OrangeButton className={styles.owner_mode_button} onClick={() => handleDelete(petData)}>Remove ✖</OrangeButton>
+                        </div>
+                        : <Link href={`/messages/${petData.owner_id}`} className={styles.card_contact_wrapper}>
+                            <Image src={smsIco} alt="sms message icon" className={styles.card_contact_img} />
+                            <span className={styles.card_contact_text}>Talk with the responsable</span>
+                        </Link>
+                    }
                 </address>
             </div>
         </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./styles.module.css"
-import PetCard from "@/components/pages/home/PetCard"
+import PetCard from "@/components/PetCard/PetCard"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"

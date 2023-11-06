@@ -8,10 +8,11 @@ import NewPetDialog from "@/components/NewPetDialog/NewPetDialog"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
-import PetCard from "@/components/pages/home/PetCard"
+import PetCard from "@/components/PetCard/PetCard"
 import useUser from "@/hooks/use_user"
 import { useState } from "react"
 import useSWR from "swr"
+import { IPet } from "@/interfaces/IPet"
 
 export default function MyPets() {
 
@@ -21,7 +22,6 @@ export default function MyPets() {
     const petsResponse = useSWR("fetchPetsForMyPets",
         async () => {
             const data = await fetchMyPets(user!.id)
-            console.log(data)
             if (data) {
                 return data
             }
@@ -52,16 +52,28 @@ export default function MyPets() {
         )
     }
 
+    function handleEdit(petData: IPet) { //TODO: do this
+        console.log("editiing" + petData.id)
+    }
+
+    function handleDelete(petData: IPet) { //TODO: do this
+        console.log("deleting" + petData.id)
+    }
+
     return (
         <>
             <ProfileButton />
             <div className={styles.main}>
                 <PageHeaderText>Manage your friends.</PageHeaderText>
-                {user!.role === "owner" ? <OrangeButton
-                    className={styles.new_pet_button}
-                    onClick={handleNewPetButton}>🐶 Click here to new pet up for adoption 😸</OrangeButton> : <></>}
+                {user!.role === "owner"
+                    ? <OrangeButton
+                        className={styles.new_pet_button}
+                        onClick={handleNewPetButton}>🐶 Click here to new pet up for adoption 😸</OrangeButton>
+                    : <></>}
                 <section className={styles.catalog}>
-                    {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} />)}
+                    {petsResponse.data.map((pet, index) => <PetCard key={index}
+                        petData={pet} ownerMode={true}
+                        handleEdit={handleEdit} handleDelete={handleDelete} />)}
                 </section>
             </div>
             <NewPetDialog

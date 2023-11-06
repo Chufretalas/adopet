@@ -62,4 +62,11 @@
     width: auto;
 }
 
+.owner_mode_buttons_wrapper {
+    gap: 10px;
+    display: flex;
+}
 
+.owner_mode_button {
+    padding: 0.2rem 0.3rem;
+}
