@@ -7,16 +7,14 @@ import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import useUser from "@/hooks/use_user"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
-import NewPetDialog from "@/components/NewPetDialog/NewPetDialog"
-import { useState } from "react"
 import useSWR from "swr"
 import fetchPetsForHome from "@/actions/fetch_pets_for_home"
 import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
+import Link from "next/link"
 
 export default function Home() {
 
     const { user, error, isLoading } = useUser()
-    const [isOpened, setIsOpened] = useState<boolean>(false)
 
     const petsResponse = useSWR("fetchPetsForCards",
         async () => {
@@ -37,12 +35,8 @@ export default function Home() {
 
     if (error && !user) {
         return (
-            <NeedsToLogin redirect="home"/>
+            <NeedsToLogin redirect="home" />
         )
-    }
-
-    async function handleNewPetButton() {
-        setIsOpened(true)
     }
 
     if (petsResponse.isLoading || !petsResponse.data) {
@@ -56,21 +50,13 @@ export default function Home() {
         <>
             <ProfileButton />
             <div className={styles.main}>
-                {user!.role === "owner" ? <OrangeButton
-                    className={styles.new_pet_button}
-                    onClick={handleNewPetButton}>🐶 Click here to new pet up for adoption 😸</OrangeButton> : <></>}
+                {user!.role === "owner" ? <Link href={"./my_pets"}><OrangeButton
+                    className={styles.new_pet_button}>⚙ Manage my pets 🛠</OrangeButton></Link> : <></>}
                 <PageHeaderText>Hello {user!.name} see some friends available for adoption.</PageHeaderText>
                 <section className={styles.catalog}>
                     {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} />)}
                 </section>
             </div>
-            <NewPetDialog
-                isOpened={isOpened}
-                onClose={() => {
-                    setIsOpened(false)
-                    petsResponse.mutate()
-                }}
-                userId={user!.id} />
         </>
     )
 }

@@ -1,0 +1,25 @@
+.main {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0.4rem;
+}
+
+.new_pet_button {
+    display: block;
+    margin: 1rem auto;
+}
+
+.catalog_title {
+    color: var(--blue-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 10px;
+    column-gap: 4px;
+}
