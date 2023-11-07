@@ -13,11 +13,14 @@ import useUser from "@/hooks/use_user"
 import { useState } from "react"
 import useSWR from "swr"
 import { IPet } from "@/interfaces/IPet"
+import deletePet from "@/actions/deletePet"
+import SnackBar from "@/components/Snackbar/Snackbar"
 
 export default function MyPets() {
 
     const { user, error, isLoading } = useUser()
     const [isOpened, setIsOpened] = useState<boolean>(false)
+    const [snackbar, setSnackbar] = useState<{ message: string, visible: boolean }>({ message: "aaaaa", visible: false })
 
     const petsResponse = useSWR("fetchPetsForMyPets",
         async () => {
@@ -52,12 +55,22 @@ export default function MyPets() {
         )
     }
 
-    function handleEdit(petData: IPet) { //TODO: do this
-        console.log("editiing" + petData.id)
+    async function handleEdit(petData: IPet) { //TODO: do this
+        console.log("editing" + petData.id)
     }
 
-    function handleDelete(petData: IPet) { //TODO: do this
-        console.log("deleting" + petData.id)
+    async function handleDelete(petData: IPet) { //TODO: do this
+        if (confirm(`Are you sure you want to remove ${petData.name}? This action can not be undone.`)) {
+            const deleted = await deletePet(petData.id)
+
+            if (deleted) {
+                petsResponse.mutate()
+                setSnackbar({ message: `${petData.name} removed successfully.`, visible: true })
+                return
+            }
+
+            setSnackbar({ message: `Something went wrong. Try again or come back later later.`, visible: true })
+        }
     }
 
     return (
@@ -76,6 +89,9 @@ export default function MyPets() {
                         handleEdit={handleEdit} handleDelete={handleDelete} />)}
                 </section>
             </div>
+            <SnackBar visible={snackbar.visible} onNotVisible={() => setSnackbar({ message: "", visible: false })}>
+                {snackbar.message}
+            </SnackBar>
             <NewPetDialog
                 isOpened={isOpened}
                 onClose={() => {
