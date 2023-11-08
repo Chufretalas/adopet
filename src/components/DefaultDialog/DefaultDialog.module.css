@@ -3,12 +3,6 @@
     border-radius: 20px;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
 .close_button {
     border-radius: 999999px;
     height: 26px;
@@ -21,8 +15,24 @@
     margin-bottom: 0.8rem;
     cursor: pointer;
     transition: all 200ms;
-}   
+    margin: auto 0;
+}
 
 .close_button:hover {
     background-color: rgb(208, 208, 208);
+}
+
+.dialog_header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.dialog_header span {
+    text-align: center;
+    vertical-align: super;
+    font-weight: bold;
 }
