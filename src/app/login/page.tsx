@@ -29,7 +29,6 @@ export default function LoginPage() {
         if (error === null) {
             localStorage.setItem("token", token)
             if (sParams.has("redirect")) {
-                //TODO: maybe check if the URL is valid before redirecting
                 return router.push(sParams.get("redirect")!)
             }
             router.push("/home")

@@ -30,7 +30,7 @@ export default async function createPet(
                 city: city,
                 state: state,
                 available: true,
-                size: toPrismaSize(size), //TODO: I seen to have two implementations of the pet_size type, maybe a should only use the prisma one
+                size: toPrismaSize(size),
                 photo_url: photoUrl,
                 personality: personality
             }

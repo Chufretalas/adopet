@@ -13,6 +13,7 @@ model messages {
   receiver_id                       Int?
   message                           String
   created                           DateTime? @default(now()) @db.Timestamptz(6)
+  read                              Boolean?  @default(false)
   users_messages_receiver_idTousers users?    @relation("messages_receiver_idTousers", fields: [receiver_id], references: [id], onUpdate: NoAction)
   users_messages_sender_idTousers   users?    @relation("messages_sender_idTousers", fields: [sender_id], references: [id], onUpdate: NoAction)
 }
