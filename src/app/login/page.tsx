@@ -1,21 +1,31 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./styles.module.css"
 import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import Image from "next/image"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
-import { useSearchParams, useRouter } from "next/navigation"
+import { useSearchParams, useRouter, redirect } from "next/navigation"
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 import login from "@/actions/login"
+import useUser from "@/hooks/use_user"
 
+//TODO: find a way to take the person to /home if he is logged in, maybe with a url param, saying he was sent there because he wasnt logged in so theres no need to check
 export default function LoginPage() {
+
+    const { user, error, isLoading } = useUser()
 
     const sParams = useSearchParams()
 
     const router = useRouter()
+
+    useEffect(() => {
+        if (user && !error && !isLoading) {
+            router.push("/home")
+        }
+    }, [user, error, isLoading])
 
     const [errorMsg, setErrorMsg] = useState("")
 
