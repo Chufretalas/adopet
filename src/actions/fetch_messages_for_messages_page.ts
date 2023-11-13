@@ -6,7 +6,8 @@ import { Prisma } from "@prisma/client"
 interface IMessagesPreview {
     otherId: number,
     OtherName: string,
-    messagesNumber: number
+    messagesNumber: number,
+    hasUnread: boolean
 }
 
 interface IMessagesPreviewDBResponse {
@@ -14,6 +15,7 @@ interface IMessagesPreviewDBResponse {
     sender_name: string,
     receiver_id: number,
     receiver_name: string,
+    read: boolean
 }
 
 export default async function fetchMessagesForMessagesPage(userId: number): Promise<IMessagesPreview[]> {
@@ -35,7 +37,8 @@ export default async function fetchMessagesForMessagesPage(userId: number): Prom
                 messages.sender_id,
                 users.name AS sender_name,
                 USER_RECEIVER.receiver_id,
-                USER_RECEIVER.receiver_name
+                USER_RECEIVER.receiver_name,
+                messages.read
             FROM
                 messages
                 JOIN users ON messages.sender_id = users.id
@@ -59,11 +62,13 @@ export default async function fetchMessagesForMessagesPage(userId: number): Prom
 
             const finalData: IMessagesPreview[] = []
             uniqueUsers.forEach(user => {
-                 finalData.push({
+                const conversationMessages = messages.filter(msg => msg.receiver_id === user[0] || msg.sender_id === user[0])
+                finalData.push({
                     otherId: user[0] as number,
                     OtherName: user[1] as string,
-                    messagesNumber: messages.filter(msg => msg.receiver_id === user[0] || msg.sender_id === user[0]).length
-                 })
+                    messagesNumber: conversationMessages.length,
+                    hasUnread: conversationMessages.some(msg => !msg.read && msg.sender_id !== userId)
+                })
             })
             return finalData
         }

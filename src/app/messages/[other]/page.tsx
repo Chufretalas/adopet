@@ -14,6 +14,7 @@ import sendIco from "../../../../public/assets/icons/send.svg"
 import sendMessage from "@/actions/send_message"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 
+//TODO: show the unread messages and mark them as read after first open (only make this with messages received not sent)
 export default function MessageOther({ params }: { params: { other: number } }) {
 
     const otherId = +params.other

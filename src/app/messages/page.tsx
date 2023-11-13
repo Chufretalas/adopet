@@ -57,6 +57,9 @@ export default function Messages() {
                                         <span>{msg.OtherName}</span>
                                         <span>Messages: {msg.messagesNumber}</span>
                                     </Link>
+                                    {
+                                        msg.hasUnread ? <span className={styles.unread_marker}>🔴</span> : <></>
+                                    }
                                 </li>
                             ))
                     }
