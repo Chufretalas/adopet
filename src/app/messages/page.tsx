@@ -50,16 +50,16 @@ export default function Messages() {
                 <ul className={styles.messagePreviewWrapper}>
                     {
                         dataResponse.data.length === 0
-                            ? <span>You never messaged anyone</span>
+                            ? <span key={1}>You never messaged anyone</span>
                             : dataResponse.data.map((msg, index) => (
-                                <li className={styles.messagePreviewCard}>
+                                <li className={styles.messagePreviewCard} key={index}>
                                     <Link href={`messages/${msg.otherId}`} key={index}>
                                         <span>{msg.OtherName}</span>
                                         <span>Messages: {msg.messagesNumber}</span>
+                                        {
+                                            msg.hasUnread ? <span className={styles.unread_marker}>🔴</span> : <></>
+                                        }
                                     </Link>
-                                    {
-                                        msg.hasUnread ? <span className={styles.unread_marker}>🔴</span> : <></>
-                                    }
                                 </li>
                             ))
                     }

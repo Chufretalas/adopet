@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className={`${josefin.className} ${styles.white_bg}`}>
         <header className={styles.header}>
           <Link href={"/"}>
-            <Image src={logo} alt="adopet logo" color="black" className={styles.header_logo} />
+            <Image src={logo} alt="adopet logo" color="black" className={styles.header_logo}  priority/>
           </Link>
           <div className={styles.nav_buttons}>
             <Link href={"/home"}>

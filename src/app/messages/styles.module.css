@@ -33,7 +33,7 @@
 }
 
 .unread_marker {
-    position: relative;
-    bottom: 20px;
-    left: 5px;
+    position: absolute;
+    bottom: 7px;
+    right: 5px;
 }

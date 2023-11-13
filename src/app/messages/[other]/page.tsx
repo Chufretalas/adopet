@@ -13,8 +13,8 @@ import Image from "next/image"
 import sendIco from "../../../../public/assets/icons/send.svg"
 import sendMessage from "@/actions/send_message"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
+import markAsRead from "@/actions/mark_as_read"
 
-//TODO: show the unread messages and mark them as read after first open (only make this with messages received not sent)
 export default function MessageOther({ params }: { params: { other: number } }) {
 
     const otherId = +params.other
@@ -38,7 +38,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
             if (data) {
                 return data
             }
-            throw Error("could not fetch available pets")
+            throw Error("could not fetch conversation")
         }
     )
 
@@ -60,7 +60,12 @@ export default function MessageOther({ params }: { params: { other: number } }) 
             </DefaultPageWrapper>
 
         )
+    } else {
+        if (dataResponse.data.messages.some(msg => !msg.read && msg.sender_id !== user?.id)) {
+            markAsRead(user!.id, otherId)
+        }
     }
+
 
     async function handleForm() {
         const message = newMessage.current!.value.trim()
@@ -84,13 +89,13 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                         if (msg.sender_id === otherId) {
                             return (
                                 <li className={styles.other_msg} key={msg.id}>
-
                                     <span className={styles.other_content}>{msg.message}</span>
                                     <span className={styles.other_date}>
                                         Sent: {msg.created?.toLocaleString("en-US", {
                                             dateStyle: "medium",
                                             timeStyle: "short",
                                         })}
+                                        {msg.read ? "🟢" : "🟡"}
                                     </span>
                                 </li>
                             )
@@ -103,6 +108,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                                         dateStyle: "medium",
                                         timeStyle: "short",
                                     })}
+                                    {msg.read ? "🟢" : "🟡"}
                                 </span>
                             </li>
                         )
