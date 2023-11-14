@@ -25,7 +25,7 @@ export default function MyPets() {
     const [isOpenedEdit, setIsOpenedEdit] = useState<boolean>(false)
     const [editPetId, setEditPetId] = useState<number>(-1)
     const [editPetFormData, setEditPetFormData] = useState<PetFormData>({ name: "", birthday: new Date(), city: "", state: "", personality: "", size: PetSize.Sm })
-    const [snackbar, setSnackbar] = useState<{ message: string, visible: boolean }>({ message: "aaaaa", visible: false })
+    const [snackbar, setSnackbar] = useState<{ message: string, visible: boolean }>({ message: "", visible: false })
 
     const petsResponse = useSWR("fetchPetsForMyPets",
         async () => {

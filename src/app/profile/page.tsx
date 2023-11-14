@@ -11,13 +11,20 @@ import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import useUser from "@/hooks/use_user"
 import fetchProfileStuff from "@/actions/fetch_profile_stuff"
 import useSWR from "swr"
-import Link from "next/link"
 import updateProfile from "@/actions/update_profile"
 import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
+import DangerButton from "@/components/DangerButton/DangerButton"
+import { useState } from "react"
+import ConfirmWithPassDialog from "@/components/ConfirmWithPassDialog/ConfirmWithPassDialog"
+import deleteUser from "@/actions/delete_user"
+import SnackBar from "@/components/Snackbar/Snackbar"
 
+//TODO: Make a public profile page accesible in the chat page
 export default function Profile() {
 
     const { user, error, isLoading } = useUser()
+    const [isOpened, setIsOpened] = useState<boolean>(false)
+    const [snackbar, setSnackbar] = useState<{ message: string, visible: boolean }>({ message: "", visible: false })
 
     const profileResponse = useSWR("fetchProfileData",
         async () => {
@@ -36,7 +43,7 @@ export default function Profile() {
     }
 
     if (error && !user) {
-        return <NeedsToLogin redirect="profile"/>
+        return <NeedsToLogin redirect="profile" />
     }
 
     const profileData = profileResponse.data
@@ -103,7 +110,21 @@ export default function Profile() {
                     </DefaultFieldset>
                     <OrangeButton className={styles.save_button} type="submit">Save</OrangeButton>
                 </form>
+                <DangerButton onClick={() => setIsOpened(true)}>🔥 Delete Account 🔥</DangerButton>
             </DefaultPageWrapper>
+            <ConfirmWithPassDialog isOpened={isOpened} onClose={() => setIsOpened(false)} callBack={async () => {
+                const deleted = await deleteUser(user!.id)
+                if (deleted) {
+                    window.localStorage.clear()
+                    location.reload()
+                } else {
+                    setSnackbar({ message: "could not delete account, try again later", visible: true })
+                }
+            }}
+                placeholder="There is no going back from this!" userId={user!.id} />
+            <SnackBar visible={snackbar.visible} onNotVisible={() => setSnackbar({ message: "", visible: false })}>
+                {snackbar.message}
+            </SnackBar>
         </>
     )
 }

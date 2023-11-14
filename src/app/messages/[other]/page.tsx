@@ -15,6 +15,7 @@ import sendMessage from "@/actions/send_message"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import markAsRead from "@/actions/mark_as_read"
 
+//TODO: disclaimer to not write sensitive information since messages are not encrypted
 export default function MessageOther({ params }: { params: { other: number } }) {
 
     const otherId = +params.other
@@ -125,6 +126,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                     </button>
                 </form>
             </DefaultPageWrapper>
+            <span className={styles.chat_disclaimer}>Don't sent any sensitive information in the chat. The messages are not encrypted.</span>
         </>
     )
 }

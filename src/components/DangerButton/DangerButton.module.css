@@ -1,0 +1,25 @@
+
+.danger_button {
+    background-color: rgb(197, 0, 0);
+    border: none;
+    border-radius: 9999999px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: white;
+    padding: 0.5rem;
+    margin-top: 20vh;
+    transition: all 300ms;
+    
+}
+
+.danger_button:hover {
+    background-color: red;
+    filter: brightness(90%);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+    cursor: pointer;
+}
+
+.danger_button:active {
+    transform: scale(1.2);
+}

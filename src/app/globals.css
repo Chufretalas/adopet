@@ -8,10 +8,14 @@
   --orange-color: #FC7071;
 }
 
-body {  
+body {
   background-color: var(--white-bg-color);
 }
 
 a {
   text-decoration: none;
+}
+
+* {
+  font-family: var(--font-josefin);
 }

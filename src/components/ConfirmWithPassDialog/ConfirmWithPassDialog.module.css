@@ -1,0 +1,12 @@
+.confirm_button {
+    margin-top: 1rem;
+}
+
+.error_msg {
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+    text-decoration: underline;
+}

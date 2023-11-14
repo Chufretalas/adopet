@@ -11,6 +11,9 @@
 
 .img_and_desc {
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .img_and_desc:hover {

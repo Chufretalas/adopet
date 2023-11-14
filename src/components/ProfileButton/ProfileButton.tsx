@@ -13,7 +13,6 @@ export default function ProfileButton() {
             </Link>
             <button className={styles.logout_button} onClick={() => {
                 window.localStorage.clear()
-                console.log("token: " + localStorage.getItem("token"))
                 location.reload()
             }}>
                 <Image src={logoutIco} alt="logout icon" className={styles.logout_icon} />
