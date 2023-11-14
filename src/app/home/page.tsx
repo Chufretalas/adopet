@@ -54,7 +54,7 @@ export default function Home() {
                     className={styles.new_pet_button}>⚙ Manage my pets 🛠</OrangeButton></Link> : <></>}
                 <PageHeaderText>Hello {user!.name} see some friends available for adoption.</PageHeaderText>
                 <section className={styles.catalog}>
-                    {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} />)}
+                    {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} ownerMode={false} />)}
                 </section>
             </div>
         </>
