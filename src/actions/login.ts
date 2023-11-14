@@ -20,7 +20,7 @@ export default async function login(info: ILoginInfo): Promise<ILoginResponse> {
         if (user) {
             const passed = await comparePass(info.password.toString(), user.password)
             if (passed) {
-                const token = jwt.sign({ id: user.id, name: user.name, role: user.role }, process.env.JWT_PRIVATE as string, { expiresIn: "3h", algorithm: "ES512" })
+                const token = jwt.sign({ id: user.id, name: user.name, role: user.role }, process.env.JWT_KEY as string, { expiresIn: "3h" })
                 return { token, error: null }
             }
         }
