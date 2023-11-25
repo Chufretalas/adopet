@@ -26,7 +26,7 @@ export default async function createPet(
             data: {
                 owner_id: ownerId,
                 name: name,
-                birthday: birthday.getTime(),
+                birthday: birthday.getTime(), //TODO: if the date is in the future put today here
                 city: city,
                 state: state,
                 available: true,

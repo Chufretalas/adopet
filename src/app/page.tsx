@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div className={styles.main}>
       <span className={styles.disclaimer}>Disclaimer! This site is just a portfolio project, it's not meant to be used as way to find pets to adopt or anything that relates to the apparent usage of this site.</span>
-      <div className={styles.logo_greetings}>
-        <Image src={logo} alt="adopet logo" />
+      <div className={styles.logo_greetings} >
+        <Image src={logo} alt="adopet logo" className={styles.big_logo} />
         <h1>Welcome!</h1>
         <p>Adopting can change a life. How about finding your new best friend today?</p>
         <p>Come with us!</p>

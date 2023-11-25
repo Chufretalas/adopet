@@ -15,7 +15,7 @@ import sendMessage from "@/actions/send_message"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import markAsRead from "@/actions/mark_as_read"
 
-//TODO: disclaimer to not write sensitive information since messages are not encrypted
+//TODO: other message is overflowing
 export default function MessageOther({ params }: { params: { other: number } }) {
 
     const otherId = +params.other
