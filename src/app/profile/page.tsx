@@ -18,6 +18,7 @@ import { useState } from "react"
 import ConfirmWithPassDialog from "@/components/ConfirmWithPassDialog/ConfirmWithPassDialog"
 import deleteUser from "@/actions/delete_user"
 import SnackBar from "@/components/Snackbar/Snackbar"
+import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
 //TODO: Make a public profile page accesible in the chat page
 export default function Profile() {
@@ -51,7 +52,7 @@ export default function Profile() {
 
     if (profileIsLoading || !profileData) {
         return (
-            <LoadingMessage customMessage="fetching profile data..." />
+            <LoadingMessage loggedLayout={true} customMessage="fetching profile data..." />
         )
     }
 
@@ -68,7 +69,7 @@ export default function Profile() {
     }
 
     return (
-        <>
+        <LoggedLayout>
             <ProfileButton />
             <DefaultPageWrapper
                 headertext="This profile is what is shown to the people you send messages to."
@@ -125,6 +126,6 @@ export default function Profile() {
             <SnackBar visible={snackbar.visible} onNotVisible={() => setSnackbar({ message: "", visible: false })}>
                 {snackbar.message}
             </SnackBar>
-        </>
+        </LoggedLayout>
     )
 }

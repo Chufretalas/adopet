@@ -11,6 +11,7 @@ import useSWR from "swr"
 import fetchPetsForHome from "@/actions/fetch_pets_for_home"
 import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
 import Link from "next/link"
+import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
 export default function Home() {
 
@@ -41,13 +42,13 @@ export default function Home() {
 
     if (petsResponse.isLoading || !petsResponse.data) {
         return (
-            <LoadingMessage customMessage="waiting for the pets..."></LoadingMessage>
+            <LoadingMessage loggedLayout={true} customMessage="waiting for the pets..."></LoadingMessage>
         )
     }
 
 
     return (
-        <>
+        <LoggedLayout>
             <ProfileButton />
             <div className={styles.main}>
                 {user!.role === "owner" ? <Link href={"./my_pets"}><OrangeButton
@@ -57,6 +58,6 @@ export default function Home() {
                     {petsResponse.data.map((pet, index) => <PetCard key={index} petData={pet} ownerMode={false} />)}
                 </section>
             </div>
-        </>
+        </LoggedLayout>
     )
 }

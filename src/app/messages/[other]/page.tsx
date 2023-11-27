@@ -14,6 +14,7 @@ import sendIco from "../../../../public/assets/icons/send.svg"
 import sendMessage from "@/actions/send_message"
 import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import markAsRead from "@/actions/mark_as_read"
+import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
 //TODO: other message is overflowing
 export default function MessageOther({ params }: { params: { other: number } }) {
@@ -55,10 +56,12 @@ export default function MessageOther({ params }: { params: { other: number } }) 
 
     if (dataResponse.isLoading || !dataResponse.data) {
         return (
-            <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
-                innerClass={styles.pageWrapperInner}>
-                <LoadingMessage customMessage="loading messages..."></LoadingMessage>
-            </DefaultPageWrapper>
+            <LoggedLayout>
+                <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
+                    innerClass={styles.pageWrapperInner}>
+                    <LoadingMessage noLayout={true} customMessage="loading messages..."></LoadingMessage>
+                </DefaultPageWrapper>
+            </LoggedLayout>
 
         )
     } else {
@@ -81,7 +84,7 @@ export default function MessageOther({ params }: { params: { other: number } }) 
     }
 
     return (
-        <>
+        <LoggedLayout>
             <ProfileButton />
             <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
                 innerClass={styles.pageWrapperInner}>
@@ -127,6 +130,6 @@ export default function MessageOther({ params }: { params: { other: number } }) 
                 </form>
             </DefaultPageWrapper>
             <span className={styles.chat_disclaimer}>Don't sent any sensitive information in the chat. The messages are not encrypted.</span>
-        </>
+        </LoggedLayout>
     )
 }

@@ -17,6 +17,7 @@ import deletePet from "@/actions/delete_pet"
 import SnackBar from "@/components/Snackbar/Snackbar"
 import EditPetDialog from "@/components/pet_dialogs/EditPetDialog/EditPetDialog"
 import { PetFormData } from "@/components/pet_dialogs/PetForm/PetForm"
+import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
 export default function MyPets() {
 
@@ -52,7 +53,7 @@ export default function MyPets() {
 
     if (petsResponse.isLoading || !petsResponse.data) {
         return (
-            <LoadingMessage customMessage="waiting for the pets..."></LoadingMessage>
+            <LoadingMessage loggedLayout={true} customMessage="waiting for the pets..."></LoadingMessage>
         )
     }
 
@@ -84,7 +85,7 @@ export default function MyPets() {
     }
 
     return (
-        <>
+        <LoggedLayout>
             <ProfileButton />
             <div className={styles.main}>
                 <PageHeaderText>Manage your friends.</PageHeaderText>
@@ -118,6 +119,6 @@ export default function MyPets() {
                 petId={editPetId}
                 editPetFormData={editPetFormData}
                 setEditPetFormData={setEditPetFormData} />
-        </>
+        </LoggedLayout>
     )
 }

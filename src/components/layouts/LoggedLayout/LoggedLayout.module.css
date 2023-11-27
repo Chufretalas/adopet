@@ -1,0 +1,123 @@
+.header {
+    position: relative;
+    top: 0;
+    background-color: var(--accent-color);
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    max-height: 6vh;
+    margin-bottom: 0.3rem;
+}
+
+.header_logo {}
+
+
+.header_logo img {
+    max-height: 6vh;
+    width: auto;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+@media only screen and (min-width: 768px) {
+    .header {
+        display: block;
+        width: 18vw;
+        border-bottom-right-radius: 99999px;
+        max-height: none;
+        margin-bottom: none;
+    }
+
+    .header_logo {
+        position: relative;
+        left: 10px;
+        top: 5px;
+        width: 80%;
+        max-height: none;
+    }
+
+    .header_logo img {
+    max-height: 7vh;
+    padding-left: 0;
+    }
+}
+
+.nav_buttons {
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.nav_buttons img {
+    cursor: pointer;
+    transition: all 100ms;
+    height: 2.6rem;
+    width: auto;
+}
+
+.nav_buttons img:hover {
+    filter: drop-shadow(0px 0px 2px rgba(1, 79, 56, 0.4));
+}
+
+.nav_buttons img:active {
+    transform: scale(1.05);
+}
+
+@media only screen and (max-width: 768px) {
+    .nav_buttons {
+        width: 50%;
+    }
+}
+
+.main {
+    min-height: 95vh;
+}
+
+.footer {
+    position: static;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 3.5vw;
+}
+
+.footer_content {
+    background-color: var(--accent-color);
+    font-size: large;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    border-top-left-radius: 99999px;
+    border-top-right-radius: 99999px;
+
+}
+
+.footer_content a {
+    text-decoration: none;
+    color: black;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .main {
+        min-height: 90lvh;
+    }
+
+    .footer {
+        height: 5vw;
+        padding-top: 10px;
+    }
+
+    .footer_content {
+        font-size: small;
+    }
+}

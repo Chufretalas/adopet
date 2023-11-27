@@ -9,6 +9,7 @@ import useUser from "@/hooks/use_user"
 import Link from "next/link"
 import useSWR from "swr"
 import styles from "./styles.module.css"
+import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
 //TODO: make messages markeable as read and only show how many unread messages
 export default function Messages() {
@@ -36,15 +37,17 @@ export default function Messages() {
 
     if (dataResponse.isLoading || !dataResponse.data) {
         return (
-            <DefaultPageWrapper headertext="Your messages" innerClass={styles.pageWrapperInner}>
-                <LoadingMessage customMessage="loading messages..."></LoadingMessage>
-            </DefaultPageWrapper>
+            <LoggedLayout>
+                <DefaultPageWrapper headertext="Your messages" innerClass={styles.pageWrapperInner}>
+                    <LoadingMessage noLayout={true} customMessage="loading messages..."></LoadingMessage>
+                </DefaultPageWrapper>
+            </LoggedLayout>
 
         )
     }
 
     return (
-        <>
+        <LoggedLayout>
             <ProfileButton />
             <DefaultPageWrapper headertext="Your messages" innerClass={styles.pageWrapperInner}>
                 <ul className={styles.messagePreviewWrapper}>
@@ -65,6 +68,6 @@ export default function Messages() {
                     }
                 </ul>
             </DefaultPageWrapper>
-        </>
+        </LoggedLayout>
     )
 }
