@@ -14,10 +14,23 @@
     margin-bottom: 0.5rem;
 }
 
+
+
+@media only screen and (max-width: 768px) {
+    .main {
+        width: 80vw;
+        padding: 1rem 0.5rem;
+    }
+}
+
 .header_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.header_p {
+    text-align: center;
 }
 
 .logo {
@@ -36,6 +49,12 @@
     flex-direction: column;
     row-gap: 1rem;
     width: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+    .form {
+        width: 90%;
+    }
 }
 
 .form button {
@@ -70,3 +89,4 @@
 .button {
     width: 10rem;
 }
+

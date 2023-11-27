@@ -13,11 +13,23 @@
     filter: drop-shadow(0 0 5px rgba(128, 128, 128, 0.512));
 }
 
+@media only screen and (max-width: 768px) {
+    .main {
+        width: 80vw;
+        padding: 1rem 0.5rem;
+    }
+}
+
 .header_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.header_p {
+    text-align: center;
+}
+
 
 .logo {
     filter: brightness(0);
@@ -35,6 +47,12 @@
     flex-direction: column;
     row-gap: 2rem;
     width: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+    .form {
+        width: 90%;
+    }
 }
 
 .form button {
