@@ -4,7 +4,6 @@ import fetchMessagesForMessagesPage from "@/actions/fetch_messages_for_messages_
 import DefaultPageWrapper from "@/components/DefaultPageWrapper/DefaultPageWrapper"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
-import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import useUser from "@/hooks/use_user"
 import Link from "next/link"
 import useSWR from "swr"
@@ -48,7 +47,6 @@ export default function Messages() {
 
     return (
         <LoggedLayout>
-            <ProfileButton />
             <DefaultPageWrapper headertext="Your messages" innerClass={styles.pageWrapperInner}>
                 <ul className={styles.messagePreviewWrapper}>
                     {

@@ -12,7 +12,6 @@ import { useRef, useEffect } from "react"
 import Image from "next/image"
 import sendIco from "../../../../public/assets/icons/send.svg"
 import sendMessage from "@/actions/send_message"
-import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import markAsRead from "@/actions/mark_as_read"
 import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
@@ -85,7 +84,6 @@ export default function MessageOther({ params }: { params: { other: number } }) 
 
     return (
         <LoggedLayout>
-            <ProfileButton />
             <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
                 innerClass={styles.pageWrapperInner}>
                 <ol className={styles.chatbox} ref={chatbox}>

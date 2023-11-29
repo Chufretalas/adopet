@@ -1,3 +1,5 @@
+/* This is by far the most confusing css file I've ever made */
+
 .header {
     position: relative;
     top: 0;
@@ -7,12 +9,28 @@
     grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
-    max-height: 6vh;
+    max-height: 8vh;
     margin-bottom: 0.3rem;
 }
 
-.header_logo {}
+@media only screen and (max-width: 768px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 5px;
+    }
 
+    .header_logo {
+        max-height: 6vh;
+        width: 40vw;
+    }
+
+    .header_logo img  {
+        height: 4.9vh;
+        width: auto;
+    }
+}
 
 .header_logo img {
     max-height: 6vh;
@@ -25,6 +43,7 @@
     .header {
         display: block;
         width: 18vw;
+        max-height: 6vh;
         border-bottom-right-radius: 99999px;
         max-height: none;
         margin-bottom: none;
@@ -39,8 +58,8 @@
     }
 
     .header_logo img {
-    max-height: 7vh;
-    padding-left: 0;
+        max-height: 7vh;
+        padding-left: 0;
     }
 }
 
@@ -48,7 +67,15 @@
     width: 60%;
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
+}
+
+.nav_buttons a {
+    padding: 1px 6px;
+}
+
+.nav_buttons button {
+    background: none;
+    border: none;
 }
 
 .nav_buttons img {
@@ -69,6 +96,11 @@
 @media only screen and (max-width: 768px) {
     .nav_buttons {
         width: 50%;
+    }
+
+    .nav_buttons a,
+    .nav_buttons button {
+        padding: 0 2px;
     }
 }
 

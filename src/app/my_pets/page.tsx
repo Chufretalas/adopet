@@ -7,7 +7,6 @@ import NeedsToLogin from "@/components/NeedsToLogin/NeedsToLogin"
 import NewPetDialog from "@/components/pet_dialogs/NewPetDialog/NewPetDialog"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
-import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import PetCard from "@/components/PetCard/PetCard"
 import useUser from "@/hooks/use_user"
 import { useState } from "react"
@@ -86,7 +85,6 @@ export default function MyPets() {
 
     return (
         <LoggedLayout>
-            <ProfileButton />
             <div className={styles.main}>
                 <PageHeaderText>Manage your friends.</PageHeaderText>
                 {user!.role === "owner"

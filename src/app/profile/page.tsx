@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.css"
 import DefaultPageWrapper from "@/components/DefaultPageWrapper/DefaultPageWrapper"
-import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import Image from "next/image"
 import caovo from "../../../public/assets/images/default_profile.jpg"
@@ -70,7 +69,6 @@ export default function Profile() {
 
     return (
         <LoggedLayout>
-            <ProfileButton />
             <DefaultPageWrapper
                 headertext="This profile is what is shown to the people you send messages to."
                 innerClass={styles.main_wrapper}>

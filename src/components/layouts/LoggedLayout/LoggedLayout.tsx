@@ -4,6 +4,8 @@ import Image from "next/image"
 import logo from "../../../../public/assets/images/logo.svg"
 import homeIco from "../../../../public/assets/icons/home.svg"
 import contactIco from "../../../../public/assets/icons/mail.svg"
+import profileIco from "../../../../public/assets/icons/profile.svg"
+import logoutIco from "../../../../public/assets/icons/logout_icon.svg"
 import Link from "next/link"
 
 export default function LoggedLayout({
@@ -25,6 +27,15 @@ export default function LoggedLayout({
           <Link href={"/messages"}>
             <Image src={contactIco} alt="Contact icon" />
           </Link>
+          <Link href={"/profile"}>
+            <Image src={profileIco} alt="acount profile icon" />
+          </Link>
+          <button className={styles.logout_button} onClick={() => {
+            window.localStorage.clear()
+            location.reload()
+          }}>
+            <Image src={logoutIco} alt="logout icon" />
+          </button>
         </div>
       </header>
       <main className={styles.main}>

@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.css"
 import PetCard from "@/components/PetCard/PetCard"
-import ProfileButton from "@/components/ProfileButton/ProfileButton"
 import PageHeaderText from "@/components/PageHeaderText/PageHeaderText"
 import LoadingMessage from "@/components/LoadingMessage/LoadingMessage"
 import useUser from "@/hooks/use_user"
@@ -49,7 +48,6 @@ export default function Home() {
 
     return (
         <LoggedLayout>
-            <ProfileButton />
             <div className={styles.main}>
                 {user!.role === "owner" ? <Link href={"./my_pets"}><OrangeButton
                     className={styles.new_pet_button}>⚙ Manage my pets 🛠</OrangeButton></Link> : <></>}
