@@ -3,6 +3,14 @@
     border-radius: 20px;
 }
 
+
+@media only screen and (max-width: 768px) {
+    .dialog {
+        min-width: auto;
+        width: 85%;
+    }
+}
+
 .close_button {
     border-radius: 999999px;
     height: 26px;

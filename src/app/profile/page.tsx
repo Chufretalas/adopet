@@ -71,7 +71,8 @@ export default function Profile() {
         <LoggedLayout>
             <DefaultPageWrapper
                 headertext="This profile is what is shown to the people you send messages to."
-                innerClass={styles.main_wrapper}>
+                innerClass={styles.main_wrapper}
+                outerClass={styles.main_outer}>
                 <h1 className={styles.profile_title}>Profile</h1>
                 <form action={handleForm} className={styles.form}>
                     <DefaultFieldset className={styles.img_part}>

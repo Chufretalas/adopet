@@ -7,6 +7,17 @@
     width: 70%;
     margin: auto;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.232);
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .main_wrapper {
+        width: 80%;
+    }
+
+    .main_outer {
+        max-width: none;
+    }
 }
 
 .img_and_desc {

@@ -40,7 +40,7 @@
     display: block;
     margin-bottom: 0.1rem;
     padding-left: 0.2rem;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .your_date, .other_date {
