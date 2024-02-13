@@ -107,3 +107,18 @@
     font-weight: bold;
     color: red;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .pageWrapperInner {
+        padding: 10px 25px;
+    }
+
+    .pageWrapperOuter {
+        max-width: 95% !important;
+    }
+
+    .other_msg, .your_msg {
+        width: 60%;
+    }
+}

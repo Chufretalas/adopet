@@ -70,3 +70,11 @@
 .owner_mode_button {
     padding: 0.2rem 0.3rem;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .pet_card {
+        height: auto;
+        min-height: 12rem;
+    }
+}

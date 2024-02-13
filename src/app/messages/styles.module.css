@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex-wrap: wrap;
     row-gap: 1rem;
     column-gap: 1rem;
     padding: 50px;
@@ -36,4 +37,11 @@
     position: absolute;
     bottom: 7px;
     right: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .messagePreviewWrapper {
+        gap: none;
+        align-content: flex-start;
+    }
 }

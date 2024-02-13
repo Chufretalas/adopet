@@ -10,7 +10,6 @@ import useSWR from "swr"
 import styles from "./styles.module.css"
 import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
-//TODO: make messages markeable as read and only show how many unread messages
 export default function Messages() {
     const { user, error, isLoading } = useUser()
 
@@ -56,9 +55,9 @@ export default function Messages() {
                                 <li className={styles.messagePreviewCard} key={index}>
                                     <Link href={`messages/${msg.otherId}`} key={index}>
                                         <span>{msg.OtherName}</span>
-                                        <span>Messages: {msg.messagesNumber}</span>
+                                        <span>Unread: {msg.unreadMessages}</span>
                                         {
-                                            msg.hasUnread ? <span className={styles.unread_marker}>🔴</span> : <></>
+                                            msg.unreadMessages !== 0 ? <span className={styles.unread_marker}>🔴</span> : <></>
                                         }
                                     </Link>
                                 </li>

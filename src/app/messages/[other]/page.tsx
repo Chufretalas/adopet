@@ -15,7 +15,6 @@ import sendMessage from "@/actions/send_message"
 import markAsRead from "@/actions/mark_as_read"
 import LoggedLayout from "@/components/layouts/LoggedLayout/LoggedLayout"
 
-//TODO: other message is overflowing
 export default function MessageOther({ params }: { params: { other: number } }) {
 
     const otherId = +params.other
@@ -85,7 +84,8 @@ export default function MessageOther({ params }: { params: { other: number } }) 
     return (
         <LoggedLayout>
             <DefaultPageWrapper headertext={`Your messages with ${dataResponse.data?.otherName ?? "someone, I guess..."}`}
-                innerClass={styles.pageWrapperInner}>
+                innerClass={styles.pageWrapperInner}
+                outerClass={styles.pageWrapperOuter}>
                 <ol className={styles.chatbox} ref={chatbox}>
                     {dataResponse.data.messages.map(msg => {
                         if (msg.sender_id === otherId) {

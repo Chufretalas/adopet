@@ -6,8 +6,7 @@ import { Prisma } from "@prisma/client"
 interface IMessagesPreview {
     otherId: number,
     OtherName: string,
-    messagesNumber: number,
-    hasUnread: boolean
+    unreadMessages: number
 }
 
 interface IMessagesPreviewDBResponse {
@@ -66,8 +65,7 @@ export default async function fetchMessagesForMessagesPage(userId: number): Prom
                 finalData.push({
                     otherId: user[0] as number,
                     OtherName: user[1] as string,
-                    messagesNumber: conversationMessages.length,
-                    hasUnread: conversationMessages.some(msg => !msg.read && msg.sender_id !== userId)
+                    unreadMessages: conversationMessages.filter(msg => !msg.read && msg.sender_id !== userId).length
                 })
             })
             return finalData
