@@ -8,13 +8,15 @@ import visibleIco from "../../../public/assets/icons/visibility_on.svg"
 import { ChangeEvent, useEffect, useState } from "react"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
-import { redirect } from 'next/navigation'
 import DefaultFieldset from "@/components/DefaultFieldset/DefaultFieldset"
 import { createAccount } from "@/actions/create_account"
 import login from "@/actions/login"
 import NotLoggedLayout from "@/components/layouts/Layout/NotLoggedLayout"
+import { useRouter } from "next/navigation"
 
 export default function SignupPage() {
+
+    const router = useRouter()
 
     const [isCreatingAccount, setIsCreatingAccount] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -41,9 +43,10 @@ export default function SignupPage() {
                     const { token, error } = await login({ email: email, password: password })
                     if (error === null) {
                         window.localStorage.setItem("token", token)
-                        redirect("/home")
+                        router.push("/home")
+                    } else {
+                        errorMsg = "User created, but failed to login automatically"
                     }
-                    errorMsg = "User created, but failed to login automatically"
                 }
                 setErrorMsg(errorMsg)
             }
@@ -58,6 +61,7 @@ export default function SignupPage() {
             setErrorMsg("Both password fields must be equal")
             return
         }
+        setErrorMsg("")
         setIsCreatingAccount(true)
     }
 
