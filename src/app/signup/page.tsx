@@ -5,7 +5,7 @@ import styles from "./styles.module.css"
 import logo from "../../../public/assets/images/logo.svg"
 import hiddenIco from "../../../public/assets/icons/visibility_off.svg"
 import visibleIco from "../../../public/assets/icons/visibility_on.svg"
-import { useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import OrangeButton from "@/components/OrangeButton/OrangeButton"
 import { TUserRole } from "../../types/random_types"
 import { redirect } from 'next/navigation'
@@ -16,32 +16,53 @@ import NotLoggedLayout from "@/components/layouts/Layout/NotLoggedLayout"
 
 export default function SignupPage() {
 
+    const [isCreatingAccount, setIsCreatingAccount] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [userRole, setUserRole] = useState<TUserRole>("owner")
+
+    useEffect(() => {
+
+        if (isCreatingAccount) {
+
+            const doTheStuff = async () => {
+                let errorMsg = await createAccount({
+                    name: name,
+                    email: email,
+                    user_role: userRole,
+                    password: password
+                })
+                if (errorMsg === "") {
+                    const { token, error } = await login({ email: email, password: password })
+                    if (error === null) {
+                        window.localStorage.setItem("token", token)
+                        redirect("/home")
+                    }
+                    errorMsg = "User created, but failed to login automatically"
+                }
+                setErrorMsg(errorMsg)
+            }
+
+            doTheStuff().finally(() => setIsCreatingAccount(false))
+        }
+
+    }, [isCreatingAccount])
+
     async function handleForm(fd: FormData) {
-        const pass = fd.get("password") as string
-        const confirmPass = fd.get("confirm_password") as string
-        if (confirmPass !== pass) {
+        if (password !== confirmPassword) {
             setErrorMsg("Both password fields must be equal")
             return
         }
+        setIsCreatingAccount(true)
+    }
 
-        setErrorMsg("")
-        const sucess = await createAccount({
-            name: fd.get("name") as string,
-            email: fd.get("email") as string,
-            user_role: fd.get("user_role") as TUserRole,
-            password: pass
-        })
-        console.log(sucess)
-        if (sucess) {
-            const { token, error } = await login({ email: fd.get("email") as string, password: fd.get("password") as string })
-            if (error === null) {
-                window.localStorage.setItem("token", token)
-            }
-            redirect("/home")
-        }
+    function onChangeRadios(e: ChangeEvent<HTMLInputElement>) {
+        setUserRole(e.target.value as TUserRole)
     }
 
     return (
@@ -56,11 +77,13 @@ export default function SignupPage() {
                 <form action={handleForm} className={styles.form}>
                     <DefaultFieldset>
                         <label htmlFor="name">Name</label>
-                        <input type="text" placeholder="Your full name here" name="name" id="name" required />
+                        <input type="text" placeholder="Your full name here" name="name" id="name"
+                            value={name} onChange={e => setName(e.target.value)} required />
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="email">Email</label>
-                        <input type="email" placeholder="Your email here" name="email" id="email" required />
+                        <input type="email" placeholder="Your email here" name="email" id="email"
+                            value={email} onChange={e => setEmail(e.target.value)} required />
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <label htmlFor="password">Password</label>
@@ -68,7 +91,7 @@ export default function SignupPage() {
                             placeholder="Please write a great password, please"
                             minLength={8}
                             name="password" id="password"
-                            required
+                            value={password} onChange={e => setPassword(e.target.value)} required
                         />
                     </DefaultFieldset>
                     <DefaultFieldset>
@@ -77,17 +100,19 @@ export default function SignupPage() {
                             placeholder="Repeat your password"
                             minLength={8}
                             name="confirm_password" id="confirm_password"
-                            required />
+                            value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
                     </DefaultFieldset>
                     <DefaultFieldset>
                         <span className={styles.radios_title}>Do you...</span>
                         <div className={styles.radios_wrapper}>
                             <div className={styles.radio_field}>
-                                <input type="radio" name="user_role" id="adopter" value="adopter" defaultChecked={true} required />
+                                <input type="radio" name="user_role" id="adopter" value="adopter"
+                                    checked={userRole === "adopter"} onChange={onChangeRadios} required />
                                 <label htmlFor="adopter">want to adopt</label>
                             </div>
                             <div className={styles.radio_field}>
-                                <input type="radio" name="user_role" id="owner" value="owner" required />
+                                <input type="radio" name="user_role" id="owner" value="owner"
+                                    checked={userRole === "owner"} onChange={onChangeRadios} required />
                                 <label htmlFor="owner">have pets to put for adoption</label>
                             </div>
                         </div>
@@ -99,8 +124,8 @@ export default function SignupPage() {
                             onClick={() => setHiddenPassword(!hiddenPassword)} />
                         <p>Show password</p>
                     </div>
-                    <OrangeButton type="submit" className={styles.button}>Register</OrangeButton>
-                    <p className={styles.error_msg}>{errorMsg}</p>
+                    <OrangeButton type="submit" className={styles.button} disabled={isCreatingAccount}>Register</OrangeButton>
+                    {isCreatingAccount ? <p className={styles.creating_user_msg}>Creating user...</p> : <p className={styles.error_msg}>{errorMsg}</p>}
                 </form>
             </div>
         </NotLoggedLayout>
